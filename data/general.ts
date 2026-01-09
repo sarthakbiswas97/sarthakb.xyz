@@ -5,12 +5,12 @@ export const user = {
   postalCode: "44600",
   role: "engineer",
   openForWork: true,
-  toolsWebsite: "https://tools.ankurgajurel.tech",
+  toolsWebsite: "https://tools.ankurgajurel.com.np",
   hero: {
     title: "",
     subtitle: "a generalist software engineer",
     userExcerpt:
-      "i solve problems with code. currently tinkering around social media apis for analytics; tiktok, instagram and youtube.",
+      "i solve problems with code. currently tinkering around manim and video gen pipelines with openrouter/elevenlabs/fastapi.",
   },
   footer: {
     subtitle: "a generalist software engineer",

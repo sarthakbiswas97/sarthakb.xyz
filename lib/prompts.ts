@@ -30,13 +30,18 @@ export function generateAnkurPersonaPrompt(): string {
   const experiencesInfo = experiences
     .map(
       (exp) => `
-    - Role: ${exp.role}
-      Company: ${exp.company}
-      Period: ${exp.period}
-      Type: ${exp.type}
+    - Company: ${exp.company}
       Website: ${exp.website}
-      Description: ${exp.description}
       Stacks: ${exp.stacks.join(", ")}
+      Roles:
+${exp.roles
+  .map(
+    (role) => `        - Title: ${role.title}
+          Period: ${role.period}
+          Type: ${role.type}
+          Description: ${role.description}`
+  )
+  .join("\n")}
   `
     )
     .join("\n")

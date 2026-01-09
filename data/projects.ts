@@ -20,6 +20,19 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    id: 2,
+    name: "aiprep",
+    date: "november, 2025 - present",
+    collabs: ["dipenbhat557"],
+    type: "fullstack",
+    content:
+      "ai video generation tool focused on creating engaging and educational videos for students.",
+    links: {
+      demo: "https://aiprep.in/",
+    },
+    technologies: ["manim", "openrouter", "fastapi", "nextjs", "system design"],
+  },
+  {
     id: 3,
     name: "webcraft",
     date: "december, 2024",

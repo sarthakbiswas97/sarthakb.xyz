@@ -32,7 +32,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: user.name,
-    jobTitle: experiences[experiences.length - 1]?.role,
+    jobTitle: experiences[experiences.length - 1]?.roles[0]?.title,
     description: siteConfig.description,
     url: siteConfig.url,
     sameAs: [
