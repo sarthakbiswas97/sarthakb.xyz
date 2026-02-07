@@ -28,10 +28,10 @@ export default function Video({ item }: { item: Media }) {
           videoRefs.current[item.id] = el;
         }}
         src={item.src}
-        autoPlay
         loop
         muted
         playsInline
+        preload="metadata"
         className="w-full h-auto object-cover"
         style={{ display: "block" }}
         onClick={() => handleVideoClick(item.id)}
