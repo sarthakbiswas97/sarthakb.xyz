@@ -35,10 +35,10 @@ export default async function FolderPage({ params }: FolderPageProps) {
         {folder.items.map((item, index) => (
           <div
             key={item.id}
-            className="mb-4 break-inside-avoid overflow-hidden bg-gray-100 group cursor-pointer relative"
+            className="mb-4 break-inside-avoid overflow-hidden bg-gray-100 relative"
           >
             {item.type === "image" ? (
-              <div className="relative w-full">
+              <div className="relative w-full group">
                 <Image
                   src={item.src}
                   alt={item.caption}
@@ -54,7 +54,12 @@ export default async function FolderPage({ params }: FolderPageProps) {
                 </div>
               </div>
             ) : (
-              <Video item={item} />
+              <div className="relative w-full">
+                <Video item={item} />
+                <div className="absolute bottom-0 left-0 right-0 p-4 text-white bg-gradient-to-t from-black/70 to-transparent pointer-events-none">
+                  <p className="text-sm font-medium">{item.caption}</p>
+                </div>
+              </div>
             )}
           </div>
         ))}
