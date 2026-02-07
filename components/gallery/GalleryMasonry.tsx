@@ -125,8 +125,9 @@ export default function GalleryMasonry({
                 <VideoPlayer
                   item={activeItem}
                   observeVisibility={false}
+                  wrapperClassName="relative h-full w-full flex items-center justify-center overflow-hidden cursor-pointer"
                   fit="contain"
-                  className="max-h-full max-w-full object-contain"
+                  className="h-full w-full object-contain"
                 />
               )}
 

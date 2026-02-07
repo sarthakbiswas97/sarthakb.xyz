@@ -24,6 +24,7 @@ interface VideoPlayerProps {
   item: GalleryMedia;
   onActivate?: () => void;
   observeVisibility?: boolean;
+  wrapperClassName?: string;
   className?: string;
   fit?: "cover" | "contain";
 }
@@ -32,6 +33,7 @@ export default function VideoPlayer({
   item,
   onActivate,
   observeVisibility = true,
+  wrapperClassName,
   className,
   fit = "cover",
 }: VideoPlayerProps) {
@@ -140,7 +142,11 @@ export default function VideoPlayer({
   };
 
   return (
-    <div ref={containerRef} className="relative w-full cursor-pointer" onClick={handleVideoClick}>
+    <div
+      ref={containerRef}
+      className={wrapperClassName ?? "relative w-full cursor-pointer"}
+      onClick={handleVideoClick}
+    >
       <video
         ref={videoRef}
         src={item.src}
