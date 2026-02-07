@@ -1,32 +1,36 @@
-import { redirect } from "next/navigation";
-import Video from "./video";
-import FolderGrid from "@/components/gallery/FolderGrid";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import Video from "../../video";
 import { galleryFolders } from "@/data/gallery-folders";
 
-export interface Media {
-  id: number;
-  type: "image" | "video";
-  src: string;
-  caption: string;
+interface FolderPageProps {
+  params: {
+    slug: string;
+  };
 }
 
-export default async function Gallery() {
-  if (!process.env.GALLERY_JSON_ENDPOINT) redirect("/");
+export default function FolderPage({ params }: FolderPageProps) {
+  const folder = galleryFolders.find((f) => f.id === params.slug);
 
-  const res = await fetch(process.env.GALLERY_JSON_ENDPOINT, {
-    next: {
-      revalidate: 60,
-    },
-  });
-
-  const media: Media[] = await res.json();
+  if (!folder) {
+    notFound();
+  }
 
   return (
     <section className="container p-4 my-10 md:my-16 lg:my-20">
-      <h2 className="text-6xl mb-8">gallery</h2>
+      <div className="mb-8">
+        <Link 
+          href="/gallery" 
+          className="text-sm text-gray-600 hover:text-black transition-colors mb-2 inline-block"
+        >
+          ← back to gallery
+        </Link>
+        <h2 className="text-6xl">{folder.name}</h2>
+        <p className="text-gray-600 mt-2">{folder.date} · {folder.items.length} items</p>
+      </div>
 
       <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
-        {media.map((item) => (
+        {folder.items.map((item) => (
           <div
             key={item.id}
             className="mb-4 break-inside-avoid overflow-hidden bg-gray-100 group cursor-pointer relative"
@@ -50,8 +54,12 @@ export default async function Gallery() {
           </div>
         ))}
       </div>
-
-      <FolderGrid folders={galleryFolders} />
     </section>
   );
+}
+
+export async function generateStaticParams() {
+  return galleryFolders.map((folder) => ({
+    slug: folder.id,
+  }));
 }
