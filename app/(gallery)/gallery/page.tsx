@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import FolderGrid from "@/components/gallery/FolderGrid";
 import { fetchGalleryData, getGalleryFolderList } from "@/lib/gallery";
@@ -11,7 +12,9 @@ export default async function Gallery() {
     <section className="container p-4 my-10 md:my-16 lg:my-20">
       <h2 className="text-6xl mb-8">gallery</h2>
 
-      <GalleryMasonry items={galleryData.general} eagerCount={3} />
+      <Suspense fallback={<div className="min-h-[40vh]" />}>
+        <GalleryMasonry items={galleryData.general} eagerCount={3} />
+      </Suspense>
 
       <FolderGrid folders={getGalleryFolderList(galleryData)} />
     </section>

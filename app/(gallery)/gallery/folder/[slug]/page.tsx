@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { fetchGalleryData } from "@/lib/gallery";
@@ -33,7 +34,9 @@ export default async function FolderPage({ params }: FolderPageProps) {
         <p className="text-gray-600 mt-2">{folder.items.length} items</p>
       </div>
 
-      <GalleryMasonry items={folder.items} eagerCount={3} />
+      <Suspense fallback={<div className="min-h-[40vh]" />}>
+        <GalleryMasonry items={folder.items} eagerCount={3} />
+      </Suspense>
     </section>
   );
 }
