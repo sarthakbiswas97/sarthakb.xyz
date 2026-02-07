@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { GalleryFolder } from "@/data/gallery-folders";
+import Image from "next/image";
+import type { GalleryFolderListItem } from "@/lib/gallery";
 
 interface FolderGridProps {
-  folders: GalleryFolder[];
+  folders: GalleryFolderListItem[];
 }
 
 export default function FolderGrid({ folders }: FolderGridProps) {
@@ -17,16 +18,17 @@ export default function FolderGrid({ folders }: FolderGridProps) {
             className="group cursor-pointer"
           >
             <div className="relative aspect-square overflow-hidden bg-gray-100">
-              <img
+              <Image
                 src={folder.cover}
                 alt={folder.name}
+                fill
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-100 group-hover:opacity-90 transition-opacity" />
               <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
                 <p className="font-medium text-lg">{folder.name}</p>
                 <p className="text-sm opacity-80">{folder.items.length} items</p>
-                <p className="text-xs opacity-60 mt-1">{folder.date}</p>
               </div>
             </div>
           </Link>
