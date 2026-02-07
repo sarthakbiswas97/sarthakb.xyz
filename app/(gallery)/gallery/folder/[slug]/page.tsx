@@ -4,13 +4,14 @@ import Video from "../../video";
 import { galleryFolders } from "@/data/gallery-folders";
 
 interface FolderPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export default function FolderPage({ params }: FolderPageProps) {
-  const folder = galleryFolders.find((f) => f.id === params.slug);
+export default async function FolderPage({ params }: FolderPageProps) {
+  const { slug } = await params;
+  const folder = galleryFolders.find((f) => f.id === slug);
 
   if (!folder) {
     notFound();
