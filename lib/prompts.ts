@@ -1,5 +1,5 @@
 import { user } from "@/data/general";
-import { posts } from "@/data/blog";
+import { getAllPostsMeta } from "@/lib/blog";
 import { experiences } from "@/data/experience";
 import { projects } from "@/data/projects";
 import { skills } from "@/data/skills";
@@ -66,6 +66,8 @@ ${exp.roles
     )
     .join("\n")
     .trim();
+
+  const posts = getAllPostsMeta();
 
   const blogPostsInfo = posts
     .map(

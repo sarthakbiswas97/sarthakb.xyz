@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import Link from "next/link";
-import { posts } from "@/data/blog";
+import { BlogPostMeta } from "@/lib/blog";
 
-export default function HomeBlog() {
+export default function HomeBlog({ posts }: { posts: BlogPostMeta[] }) {
   return (
     <section id="blogs" className="container p-4 flex flex-col gap-10">
       <motion.div
@@ -35,7 +35,7 @@ export default function HomeBlog() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <a
-              href={`/blog/${post.slug}`}
+              href={`/blog/${post.id}`}
               className="group border-b-[0.5px] border-black pb-8 last:border-0"
             >
               <div className="flex flex-col gap-2">

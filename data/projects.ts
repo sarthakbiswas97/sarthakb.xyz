@@ -164,4 +164,17 @@ export const projects: Project[] = [
       "supabase",
     ],
   },
+  {
+    id: 10,
+    name: "nepal atlas map",
+    date: "feb 11, 2026",
+    collabs: [],
+    type: "fullstack",
+    content:
+      "nepal's provinces, district, municipality and constituency visualization",
+    links: {
+      demo: "https://electionatlas.ankurgajurel.com.np/immersive",
+    },
+    technologies: ["nextjs", "d3.js", "topojson", "tailwind css"],
+  },
 ];

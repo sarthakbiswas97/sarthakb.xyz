@@ -5,6 +5,7 @@ import HomeProjects from "@/components/home/projects";
 import Skills from "@/components/home/skills";
 import Experience from "@/components/home/experience";
 import Blog from "@/components/home/blog";
+import { getAllPostsMeta } from "@/lib/blog";
 
 export const metadata: Metadata = {
   ...siteMetadata,
@@ -25,6 +26,8 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const posts = getAllPostsMeta();
+
   return (
     <main className="relative">
       <Hero />
@@ -32,7 +35,7 @@ export default function Home() {
         <HomeProjects />
         <Skills />
         <Experience />
-        <Blog />
+        <Blog posts={posts} />
       </div>
     </main>
   );
