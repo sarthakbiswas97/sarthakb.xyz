@@ -1,12 +1,16 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import type { GalleryMedia } from "@/lib/gallery";
 
 function PlaybackIcon({ state }: { state: "play" | "pause" }) {
   if (state === "pause") {
     return (
-      <svg className="w-16 h-16 text-white opacity-90" fill="white" viewBox="0 0 24 24">
+      <svg
+        className="w-10 h-10 sm:w-14 sm:h-14 text-white drop-shadow-lg"
+        fill="white"
+        viewBox="0 0 24 24"
+      >
         <rect x="6" y="4" width="4" height="16" />
         <rect x="14" y="4" width="4" height="16" />
       </svg>
@@ -14,7 +18,11 @@ function PlaybackIcon({ state }: { state: "play" | "pause" }) {
   }
 
   return (
-    <svg className="w-16 h-16 text-white opacity-90" fill="white" viewBox="0 0 24 24">
+    <svg
+      className="w-10 h-10 sm:w-14 sm:h-14 text-white drop-shadow-lg"
+      fill="white"
+      viewBox="0 0 24 24"
+    >
       <polygon points="5,3 19,12 5,21" />
     </svg>
   );
@@ -27,6 +35,7 @@ interface VideoPlayerProps {
   wrapperClassName?: string;
   className?: string;
   fit?: "cover" | "contain";
+  poster?: string;
 }
 
 export default function VideoPlayer({
@@ -36,6 +45,7 @@ export default function VideoPlayer({
   wrapperClassName,
   className,
   fit = "cover",
+  poster,
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [iconState, setIconState] = useState<"play" | "pause" | null>(null);
@@ -44,20 +54,20 @@ export default function VideoPlayer({
   const iconTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isMuted = true;
 
-  const syncMute = (video: HTMLVideoElement) => {
+  const syncMute = useCallback((video: HTMLVideoElement) => {
     video.defaultMuted = isMuted;
     video.muted = isMuted;
     if (isMuted) {
       video.volume = 0;
     }
-  };
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     syncMute(video);
-  }, [isMuted]);
+  }, [syncMute]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -68,7 +78,7 @@ export default function VideoPlayer({
       .play()
       .then(() => setIsPlaying(true))
       .catch(() => {});
-  }, []);
+  }, [syncMute]);
 
   useEffect(() => {
     if (!observeVisibility) return;
@@ -98,15 +108,15 @@ export default function VideoPlayer({
     observer.observe(container);
 
     return () => observer.disconnect();
-  }, [observeVisibility]);
+  }, [observeVisibility, syncMute]);
 
-  const showIcon = (state: "play" | "pause") => {
+  const showIcon = useCallback((state: "play" | "pause") => {
     if (iconTimeoutRef.current) {
       clearTimeout(iconTimeoutRef.current);
     }
     setIconState(state);
     iconTimeoutRef.current = setTimeout(() => setIconState(null), 700);
-  };
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -116,7 +126,7 @@ export default function VideoPlayer({
     };
   }, []);
 
-  const handleVideoClick = () => {
+  const handleVideoClick = useCallback(() => {
     if (onActivate) {
       onActivate();
       return;
@@ -139,7 +149,7 @@ export default function VideoPlayer({
       setIsPlaying(false);
       showIcon("play");
     }
-  };
+  }, [onActivate, syncMute, showIcon]);
 
   return (
     <div
@@ -150,13 +160,19 @@ export default function VideoPlayer({
       <video
         ref={videoRef}
         src={item.src}
+        poster={poster}
         loop
         muted={isMuted}
         autoPlay
         playsInline
         preload="metadata"
         controls={false}
-        className={className ?? `w-full h-auto object-${fit}`}
+        className={
+          className ??
+          (fit === "contain"
+            ? "max-h-full max-w-full object-contain"
+            : "w-full h-auto object-cover")
+        }
         style={{ display: "block" }}
       />
 

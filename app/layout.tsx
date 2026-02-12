@@ -66,7 +66,7 @@ export default function RootLayout({
           {children}
           <Footer />
           <Terminal />
-          <ChatBubble />
+          {/* <ChatBubble /> */}
           <Analytics />
         </Providers>
       </body>

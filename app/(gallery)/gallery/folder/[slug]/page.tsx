@@ -22,16 +22,20 @@ export default async function FolderPage({ params }: FolderPageProps) {
   }
 
   return (
-    <section className="container p-4 my-10 md:my-16 lg:my-20">
-      <div className="mb-8">
+    <section className="container p-4 my-6 sm:my-10 md:my-16 lg:my-20">
+      <div className="mb-5 sm:mb-8">
         <Link
           href="/gallery"
-          className="text-sm text-gray-600 hover:text-black transition-colors mb-2 inline-block"
+          className="text-sm text-gray-600 hover:text-black dark:hover:text-white transition-colors mb-2 inline-block"
         >
           ← back to gallery
         </Link>
-        <h2 className="text-6xl">{folder.name}</h2>
-        <p className="text-gray-600 mt-2">{folder.items.length} items</p>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+          {folder.name}
+        </h2>
+        <p className="text-gray-600 mt-1 sm:mt-2 text-sm sm:text-base">
+          {folder.items.length} items
+        </p>
       </div>
 
       <Suspense fallback={<div className="min-h-[40vh]" />}>

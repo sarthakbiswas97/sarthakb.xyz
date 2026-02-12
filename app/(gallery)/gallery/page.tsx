@@ -9,8 +9,10 @@ export default async function Gallery() {
   if (!galleryData) redirect("/");
 
   return (
-    <section className="container p-4 my-10 md:my-16 lg:my-20">
-      <h2 className="text-6xl mb-8">gallery</h2>
+    <section className="container p-4 my-6 sm:my-10 md:my-16 lg:my-20">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-5 sm:mb-8">
+        gallery
+      </h2>
 
       <Suspense fallback={<div className="min-h-[40vh]" />}>
         <GalleryMasonry items={galleryData.general} eagerCount={3} />
