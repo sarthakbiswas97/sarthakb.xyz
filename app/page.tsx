@@ -5,6 +5,7 @@ import HomeProjects from "@/components/home/projects";
 import Skills from "@/components/home/skills";
 import Experience from "@/components/home/experience";
 import Blog from "@/components/home/blog";
+import HomeUtilities from "@/components/home/utilities";
 import { getAllPostsMeta } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -36,6 +37,7 @@ export default function Home() {
         <Skills />
         <Experience />
         <Blog posts={posts} />
+        <HomeUtilities />
       </div>
     </main>
   );

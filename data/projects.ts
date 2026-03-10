@@ -4,6 +4,7 @@ export type Project = {
   collabs: string[];
   type: string;
   date: string;
+  hidePreview?: boolean;
   description?: string;
   content?: string;
   links?: {
@@ -19,32 +20,6 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-  {
-    id: 2,
-    name: "aiprep",
-    date: "november, 2025 - present",
-    collabs: ["dipenbhat557"],
-    type: "fullstack",
-    content:
-      "ai video generation tool focused on creating engaging and educational videos for students.",
-    links: {
-      demo: "https://aiprep.in/",
-    },
-    technologies: ["manim", "openrouter", "fastapi", "nextjs", "system design"],
-  },
-  {
-    id: 3,
-    name: "webcraft",
-    date: "december, 2024",
-    collabs: ["sls0n"],
-    type: "fullstack",
-    content:
-      "drag-and-drop website builder tool. users can create websites without coding by dragging components and customizing them.",
-    links: {
-      demo: "https://webcraft.ankurgajurel.tech/",
-    },
-    technologies: ["website builder", "collaboration"],
-  },
   {
     id: 0,
     name: "resimator's landing page",
@@ -75,32 +50,32 @@ export const projects: Project[] = [
     },
     technologies: ["e-commerce", "collaboration"],
   },
-
   {
-    id: 4,
-    name: "invey",
-    date: "november, 2023",
-    collabs: ["shekharkoirala"],
-    type: "frontend",
+    id: 2,
+    name: "aiprep",
+    date: "november, 2025 - present",
+    collabs: ["dipenbhat557"],
+    type: "fullstack",
+    hidePreview: true,
     content:
-      "form builder tool for creating surveys and forms. users can drag form elements and customize them for data collection.",
+      "ai video generation tool focused on creating engaging and educational videos for students.",
     links: {
-      demo: "https://invey.ankurgajurel.tech/formbuilder",
+      demo: "https://aiprep.in/",
     },
-    technologies: ["form builder"],
+    technologies: ["manim", "openrouter", "fastapi", "nextjs", "system design"],
   },
   {
-    id: 5,
-    name: "hydra",
-    date: "2024",
-    collabs: [],
-    type: "ui conversion",
+    id: 3,
+    name: "webcraft",
+    date: "december, 2024",
+    collabs: ["sls0n"],
+    type: "fullstack",
     content:
-      "simple ui design. optimized for larger screens and desktop workflows.",
+      "drag-and-drop website builder tool. users can create websites without coding by dragging components and customizing them.",
     links: {
-      demo: "https://hydra.ankurgajurel.com.np/",
+      demo: "https://x.com/usewebcraft",
     },
-    technologies: ["ui design"],
+    technologies: ["website builder", "collaboration"],
   },
   {
     id: 6,
@@ -116,31 +91,6 @@ export const projects: Project[] = [
     },
     technologies: ["podcast"],
   },
-  // {
-  //   id: 7,
-  //   name: "webshop emails",
-  //   date: "august, 2023",
-  //   collabs: [],
-  //   type: "design",
-  //   description: "email template design clone",
-  //   content:
-  //     "email template design tool. users can create and customize email templates for marketing campaigns.",
-  //   links: {
-  //     demo: "https://webshop-emails.vercel.app/",
-  //   },
-  //   technologies: ["email design"],
-  // },
-  // {
-  //   id: 8,
-  //   name: "cognistream",
-  //   date: "fullstack",
-  //   collabs: ["shekharkoirala", "geeksambhu", "mgajurel"],
-  //   type: "ai",
-  //   description: "customer interviews with emotional depth analysis",
-  //   content:
-  //     "ai-powered tool for analyzing customer interviews. uses sentiment analysis to understand emotional responses and feedback.",
-  //   technologies: ["ai", "analysis", "wip"],
-  // },
   {
     id: 9,
     name: "social media scheduler",
@@ -176,5 +126,18 @@ export const projects: Project[] = [
       demo: "https://electionatlas.ankurgajurel.com.np/immersive",
     },
     technologies: ["nextjs", "d3.js", "topojson", "tailwind css"],
+  },
+  {
+    id: 11,
+    name: "cognistream.ai",
+    date: "july, 2025 - present",
+    collabs: [],
+    type: "fullstack",
+    content:
+      "ai video generation tool focused on creating engaging and educational videos for students.",
+    links: {
+      demo: "https://cognistream.ai/",
+    },
+    technologies: ["nextjs", "fastapi", "inngest", "typescript", "supabase"],
   },
 ];
