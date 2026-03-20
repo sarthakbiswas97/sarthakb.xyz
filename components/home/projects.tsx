@@ -77,7 +77,7 @@ export default function HomeProjects() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="border-b-[0.5px] border-foreground grid grid-cols-5 p-1 text-xs"
+            className="table-border-header grid grid-cols-5 p-1 text-xs text-foreground/50"
           >
             <div>/ DATE</div>
             <div className="col-span-2">/ PROJECT</div>

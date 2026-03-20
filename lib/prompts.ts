@@ -24,7 +24,7 @@ export function generateAnkurPersonaPrompt(): string {
   `.trim();
 
   const skillsInfo = skills
-    .map((skill) => `  - ${skill.title}: ${skill.description}`)
+    .map((skill) => `  - ${skill.title}: ${skill.items.join(", ")}`)
     .join("\n");
 
   const experiencesInfo = experiences

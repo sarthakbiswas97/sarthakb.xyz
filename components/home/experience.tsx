@@ -25,7 +25,7 @@ export default function Experience() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group border-b-[0.5px] border-foreground pb-12 last:border-0"
+              className="group table-border pb-12 last:border-0"
             >
               <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-2">

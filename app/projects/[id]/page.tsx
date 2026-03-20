@@ -86,8 +86,8 @@ export default async function ProjectPage({
             {project.description}
           </p>
 
-          {project.links?.demo && (
-            <div className="mt-12 mb-8">
+          <div className="mt-12 mb-8 flex gap-4">
+            {project.links?.demo && (
               <a
                 href={project.links.demo}
                 target="_blank"
@@ -101,13 +101,28 @@ export default async function ProjectPage({
                   />
                 </Button>
               </a>
-            </div>
-          )}
+            )}
+            {project.links?.github && (
+              <a
+                href={project.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="group flex items-center gap-2 text-sm">
+                  <span>view source</span>
+                  <ArrowUp
+                    size={16}
+                    className="group-hover:rotate-45 transition-transform duration-300"
+                  />
+                </Button>
+              </a>
+            )}
+          </div>
 
           <p className="mb-6 font-light leading-relaxed">{project?.content}</p>
         </div>
 
-        <footer className="mt-16 pt-8 border-t-[0.5px] border-black">
+        <footer className="mt-16 pt-8 border-t border-foreground/10">
           <Link
             href="/#projects"
             className="inline-flex items-center gap-2 group text-lg"

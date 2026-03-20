@@ -1,13 +1,53 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { fetchGalleryData } from "@/lib/gallery";
+import { Metadata } from "next";
+import { fetchGalleryData, toOgImage } from "@/lib/gallery";
+import { siteMetadata, siteConfig } from "@/config/siteConfig";
 import GalleryMasonry from "@/components/gallery/GalleryMasonry";
 
 interface FolderPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({
+  params,
+}: FolderPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const data = await fetchGalleryData();
+  const folder = data?.folders[slug];
+  if (!folder) return {};
+
+  const title = `${folder.name} | gallery`;
+  const description = `${folder.name} — ${folder.items.length} photos & videos`;
+  const rawSrc =
+    folder.cover ||
+    folder.items.find((i) => i.type === "image")?.src ||
+    folder.items[0]?.src;
+  const ogImage = rawSrc ? toOgImage(rawSrc) : undefined;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      ...siteMetadata.openGraph,
+      type: "website",
+      title,
+      description,
+      url: `${siteConfig.url}/gallery/folder/${slug}`,
+      ...(ogImage && {
+        images: [{ url: ogImage, width: 1200, height: 630, alt: folder.name }],
+      }),
+    },
+    twitter: {
+      ...siteMetadata.twitter,
+      title,
+      description,
+      ...(ogImage && { images: [ogImage] }),
+    },
+  };
 }
 
 export default async function FolderPage({ params }: FolderPageProps) {

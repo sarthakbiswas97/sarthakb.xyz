@@ -8,11 +8,18 @@ import { useState } from "react";
 
 export default function HomeUtilities() {
   const [hoveredUtility, setHoveredUtility] = useState<{
-    github: string;
+    url: string;
     name: string;
     x: number;
     y: number;
   } | null>(null);
+
+  const getOgImageUrl = (url: string) => {
+    if (url.includes("github.com")) {
+      return `https://opengraph.githubassets.com/1/${url.replace("https://github.com/", "")}`;
+    }
+    return `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`;
+  };
 
   return (
     <section className="container p-4 flex flex-col gap-10 my-10">
@@ -40,7 +47,7 @@ export default function HomeUtilities() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="border-b-[0.5px] border-foreground grid grid-cols-4 p-1 text-xs"
+            className="table-border-header grid grid-cols-4 p-1 text-xs"
           >
             <div>/ NAME</div>
             <div className="col-span-2">/ DESCRIPTION</div>
@@ -56,13 +63,13 @@ export default function HomeUtilities() {
               transition={{ duration: 0.5, delay: index * 0.05 }}
             >
               <a
-                href={utility.github}
+                href={utility.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-b-[0.5px] border-foreground grid grid-cols-4 p-2 group hover:bg-card transition-colors duration-200 font-light cursor-pointer block"
+                className="table-border grid grid-cols-4 p-2 group hover:bg-card transition-colors duration-200 font-light cursor-pointer block"
                 onMouseEnter={(e) =>
                   setHoveredUtility({
-                    github: utility.github,
+                    url: utility.url,
                     name: utility.name,
                     x: e.clientX,
                     y: e.clientY,
@@ -96,8 +103,8 @@ export default function HomeUtilities() {
 
       {hoveredUtility && (
         <img
-          src={`https://opengraph.githubassets.com/1/${hoveredUtility.github.replace("https://github.com/", "")}`}
-          alt={`${hoveredUtility.name} GitHub preview`}
+          src={getOgImageUrl(hoveredUtility.url)}
+          alt={`${hoveredUtility.name} preview`}
           className="fixed w-80 rounded-lg shadow-lg border border-foreground/20 pointer-events-none"
           style={{
             left: hoveredUtility.x + 16,

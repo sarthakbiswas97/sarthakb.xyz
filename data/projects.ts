@@ -21,6 +21,19 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    id: 12,
+    name: "county gis rag",
+    date: "march, 2026",
+    collabs: [],
+    type: "fullstack",
+    content:
+      "rag-powered chat interface for querying us county gis and parcel data. ingests public gis datasets, embeds them, and lets users ask natural language questions about parcels, zoning, and land records.",
+    links: {
+      github: "https://github.com/ankurgajurel/county-gis-rag",
+    },
+    technologies: ["next.js", "fastapi", "postgresql", "openai", "docker", "sqlalchemy"],
+  },
+  {
     id: 0,
     name: "resimator's landing page",
     date: "march, 2024",
@@ -53,7 +66,7 @@ export const projects: Project[] = [
   {
     id: 2,
     name: "aiprep",
-    date: "november, 2025 - present",
+    date: "nov, 2025",
     collabs: ["dipenbhat557"],
     type: "fullstack",
     hidePreview: true,
@@ -117,7 +130,7 @@ export const projects: Project[] = [
   {
     id: 10,
     name: "nepal atlas map",
-    date: "feb 11, 2026",
+    date: "feb, 2026",
     collabs: [],
     type: "fullstack",
     content:
@@ -130,7 +143,7 @@ export const projects: Project[] = [
   {
     id: 11,
     name: "cognistream.ai",
-    date: "july, 2025 - present",
+    date: "july, 2025 - feb, 2026",
     collabs: [],
     type: "fullstack",
     content:

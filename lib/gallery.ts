@@ -77,6 +77,22 @@ export const fetchGalleryData = cache(async (): Promise<GalleryData | null> => {
   return payload;
 });
 
+/**
+ * Transform a Cloudinary URL into a 1200x630 auto-cropped OG image.
+ * Works for both image and video URLs (videos get a thumbnail via .jpg extension).
+ */
+export function toOgImage(src: string): string {
+  const match = src.match(
+    /^(https:\/\/res\.cloudinary\.com\/[^/]+\/(?:image|video)\/upload\/)(v\d+\/.+)$/
+  );
+  if (!match) return src;
+
+  const [, base, path] = match;
+  // Strip existing extension for videos and replace with .jpg
+  const jpgPath = path.replace(/\.(mp4|mov|webm|avi)$/i, ".jpg");
+  return `${base}c_fill,w_1200,h_630,g_auto,f_jpg,q_80/${jpgPath}`;
+}
+
 export function getGalleryFolderList(
   data: GalleryData
 ): GalleryFolderListItem[] {

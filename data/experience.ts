@@ -4,12 +4,12 @@ export const experiences = [
     company: "hyperce",
     website: "https://hyperce.io",
     stacks: [
-      "AWS",
-      "Azure",
-      "GitHub Actions",
-      "Vendure (NestJS)",
-      "NextJS",
-      "Tailwind",
+      "aws (ec2, ecs)",
+      "azure",
+      "github actions",
+      "nestjs",
+      "next.js",
+      "tailwind css",
     ],
     roles: [
       {
@@ -33,13 +33,12 @@ export const experiences = [
     company: "a5it",
     website: "https://a5it.com",
     stacks: [
-      "AWS",
-      "DigitalOcean",
-      "Express",
-      "NodeJS",
-      "NextJS",
-      "React Query",
-      "useSWR",
+      "aws (s3, rds, ec2, ecs, ses, sqs)",
+      "digitalocean",
+      "node.js",
+      "express",
+      "next.js",
+      "react query",
     ],
     roles: [
       {
@@ -77,13 +76,12 @@ export const experiences = [
     company: "resimator",
     website: "https://resimator.fi",
     stacks: [
-      "React",
-      "NextJS",
-      "React Query",
-      "Strapi",
-      "GraphQL",
-      "Ant Design",
-      "Framer Motion",
+      "next.js",
+      "react",
+      "graphql",
+      "strapi",
+      "framer motion",
+      "ant design",
     ],
     roles: [
       {
@@ -99,7 +97,7 @@ export const experiences = [
     id: 4,
     company: "artisai",
     website: "https://artisai.ie",
-    stacks: ["NextJS", "Tailwind", "React Query", "Supabase", "useSWR", "AWS"],
+    stacks: ["next.js", "tailwind css", "react query", "supabase", "aws"],
     roles: [
       {
         title: "software engineer consultant",

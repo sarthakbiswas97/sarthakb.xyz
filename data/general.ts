@@ -8,12 +8,12 @@ export const user = {
   toolsWebsite: "https://tools.ankurgajurel.com.np",
   hero: {
     title: "",
-    subtitle: "a generalist software engineer",
+    subtitle: "software engineer",
     userExcerpt:
-      "i solve problems with code. currently tinkering around manim and video gen pipelines with openrouter/elevenlabs/fastapi.",
+      "i build things. from web apps to ai products. currently working with rag, voice ai, and video generation.",
   },
   footer: {
-    subtitle: "a generalist software engineer",
+    subtitle: "software engineer",
   },
   socials: {
     linkedin: "https://linkedin.com/in/ankurgajurel",

@@ -30,7 +30,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="container p-4 border-t-[0.5px] border-foreground mt-20">
+    <footer className="container p-4 border-t border-foreground/10 mt-20">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -1,28 +1,28 @@
 export interface Skill {
   id: string;
   title: string;
-  description: string;
+  items: string[];
 }
 
 export const skills: Skill[] = [
   {
     id: "cloud-devops",
     title: "cloud",
-    description: "AWS (EC2, ECS, S3, RDS, SES, SQS), DigitalOcean (Droplets, Managed DB, K8s), GitHub Actions, Docker, Kubernetes"
+    items: ["AWS", "DigitalOcean", "GitHub Actions", "Docker", "Kubernetes"],
   },
   {
     id: "frontend",
     title: "frontend",
-    description: "Next.js, React, Tailwind CSS, Framer Motion, Ant Design, React Query, SWR"
+    items: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "React Query"],
   },
   {
     id: "backend",
     title: "backend",
-    description: "Node.js, Express, Nest.js, Vendure, Strapi, GraphQL, PostgreSQL"
+    items: ["Node.js", "Express", "Nest.js", "GraphQL", "PostgreSQL", "Strapi"],
   },
   {
     id: "languages-tools",
     title: "language & tools",
-    description: "TypeScript, JavaScript, Go, Git, Linux, Vim, ETL Pipelines"
-  }
-]; 
+    items: ["TypeScript", "JavaScript", "Go", "Git", "Linux", "Vim"],
+  },
+];

@@ -2,7 +2,7 @@ export type Utility = {
   id: number;
   name: string;
   description: string;
-  github: string;
+  url: string;
   language: string;
 };
 
@@ -12,21 +12,35 @@ export const utilities: Utility[] = [
     name: "clerk-export",
     description:
       "export clerk data -- orgs and users (including metadatas)",
-    github: "https://github.com/ankurgajurel/clerk-export",
+    url: "https://github.com/ankurgajurel/clerk-export",
     language: "TypeScript",
   },
   {
     id: 1,
-    name: "pg-backup-cron",
-    description: "script that backs up postgres to s3",
-    github: "https://github.com/CogniStream/pg-backup-cron",
+    name: "s3-preview",
+    description: "preview s3",
+    url: "https://github.com/ankurgajurel/s3-preview",
     language: "TypeScript",
   },
   {
     id: 2,
-    name: "s3-preview",
-    description: "preview s3",
-    github: "https://github.com/ankurgajurel/s3-preview",
-    language: "TypeScript",
+    name: "open-graph",
+    description: "generate open graph images for any url",
+    url: "https://tools.ankurgajurel.com.np/tools/open-graph",
+    language: "Web",
+  },
+  {
+    id: 3,
+    name: "trimmer",
+    description: "trim and cut media files",
+    url: "https://tools.ankurgajurel.com.np/tools/trimmer",
+    language: "Web",
+  },
+  {
+    id: 4,
+    name: "image-compressor",
+    description: "compress images without losing quality",
+    url: "https://tools.ankurgajurel.com.np/tools/image-compressor",
+    language: "Web",
   },
 ];

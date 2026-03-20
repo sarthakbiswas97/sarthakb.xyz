@@ -16,7 +16,7 @@ export default function HomeProjectCard({
   const router = useRouter();
   return (
     <div
-      className="border-b-[0.5px] border-foreground grid grid-cols-5 p-2 group hover:bg-card transition-colors duration-200 font-light cursor-pointer"
+      className="table-border grid grid-cols-5 px-3 py-1.5 group hover:bg-card transition-colors duration-200 font-light cursor-pointer"
       onClick={() => router.push("/projects/" + project.id)}
       role="button"
       tabIndex={0}
@@ -47,7 +47,7 @@ export default function HomeProjectCard({
       <div className="grid grid-cols-2 items-center">
         <div className="text-sm text-foreground">{project.type}</div>
         <ArrowUp
-          size={20}
+          size={14}
           className="group-hover:rotate-45 transition-transform duration-300 text-foreground hidden md:block"
         />
       </div>

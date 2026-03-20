@@ -15,20 +15,35 @@ export default function HomeSkills() {
         <h2 className="text-6xl">skills</h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {skills.map((skill, index) => (
+      <div className="overflow-x-auto">
+        <div className="flex flex-col gap-0 min-w-[600px]">
           <motion.div
-            key={skill.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="border-[0.5px] border-foreground p-4"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="table-border-header grid grid-cols-4 p-1 text-xs"
           >
-            <h3 className="text-xl font-medium mb-2">{skill.title}</h3>
-            <p className="text-sm text-foreground">{skill.description}</p>
+            <div>/ CATEGORY</div>
+            <div className="col-span-3">/ TOOLS</div>
           </motion.div>
-        ))}
+
+          {skills.map((skill, index) => (
+            <motion.div
+              key={skill.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              className="table-border grid grid-cols-4 px-1 py-2 font-light"
+            >
+              <div className="text-sm">{skill.title}</div>
+              <div className="col-span-3 text-sm">
+                {skill.items.join(", ")}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

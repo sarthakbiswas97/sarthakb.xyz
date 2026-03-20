@@ -125,3 +125,11 @@
 .container {
     @apply max-w-6xl mx-auto;
 }
+
+.table-border {
+    @apply border-b border-foreground/10;
+}
+
+.table-border-header {
+    @apply border-b border-foreground/15;
+}
