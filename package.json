@@ -2,6 +2,7 @@
   "name": "stripe.dev",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "bun@1.2.2",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -12,6 +13,7 @@
   "dependencies": {
     "@ai-sdk/openai": "^1.3.23",
     "@ai-sdk/react": "^1.2.12",
+    "@posthog/next": "^0.1.0",
     "@radix-ui/react-slot": "^1.2.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/dotenv": "^8.2.3",

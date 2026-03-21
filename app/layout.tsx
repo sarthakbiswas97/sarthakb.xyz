@@ -6,6 +6,8 @@ import Footer from "@/components/footer";
 import ChatBubble from "@/components/home/chat-bubble";
 import { siteMetadata, siteConfig } from "@/config/siteConfig";
 import { Analytics } from "@vercel/analytics/react";
+import { PostHogProvider, PostHogPageView } from "@posthog/next";
+import { Suspense } from "react";
 import { user } from "@/data/general";
 import { experiences } from "@/data/experience";
 import { Providers } from "@/providers";
@@ -61,14 +63,19 @@ export default function RootLayout({
         />
       </head>
       <body className={`${hubotSans.variable} ${bodoni.variable} antialiased`}>
-        <Providers>
-          <Navbar />
-          {children}
-          <Footer />
-          <Terminal />
-          {/* <ChatBubble /> */}
-          <Analytics />
-        </Providers>
+        <PostHogProvider clientOptions={{ api_host: "/ingest" }}>
+          <Providers>
+            <Suspense fallback={null}>
+              <PostHogPageView />
+            </Suspense>
+            <Navbar />
+            {children}
+            <Footer />
+            <Terminal />
+            {/* <ChatBubble /> */}
+            <Analytics />
+          </Providers>
+        </PostHogProvider>
       </body>
     </html>
   );

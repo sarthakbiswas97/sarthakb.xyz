@@ -5,6 +5,10 @@ import { projects } from "@/data/projects";
 import { Metadata } from "next";
 import Button from "@/components/ui/button";
 
+export async function generateStaticParams() {
+  return projects.map((project) => ({ id: String(project.id) }));
+}
+
 export async function generateMetadata({
   params,
 }: {
