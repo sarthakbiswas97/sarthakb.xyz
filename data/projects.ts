@@ -21,6 +21,20 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    id: 13,
+    name: "nepse-sdk",
+    date: "march, 2026",
+    collabs: [],
+    type: "sdk",
+    content:
+      "reverse-engineered nepal stock exchange's undocumented api and published it as a typed python sdk on pypi. broken jwe tokens, hidden wasm binaries, custom auth schemes, the works.",
+    links: {
+      github: "https://github.com/lagani-org/nepse-sdk/",
+      demo: "https://pypi.org/project/nepse-sdk/",
+    },
+    technologies: ["python", "httpx", "wasmtime", "click", "mypy"],
+  },
+  {
     id: 12,
     name: "county gis rag",
     date: "march, 2026",
