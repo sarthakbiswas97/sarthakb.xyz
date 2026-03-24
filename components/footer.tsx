@@ -1,8 +1,5 @@
-"use client";
-
 import { user } from "@/data/general";
 import { Github, Twitter, Linkedin, Mail } from "lucide-react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function Footer() {
@@ -32,26 +29,14 @@ export default function Footer() {
   return (
     <footer className="container p-4 border-t border-foreground/10 mt-20">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 py-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col gap-2"
-        >
+        <div className="flex flex-col gap-2">
           <Link href="/" className="text-2xl font-medium hover:underline">
             {user.name}
           </Link>
           <p className="text-sm text-foreground">{user.footer.subtitle}</p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-col gap-4"
-        >
+        <div className="flex flex-col gap-4">
           <div className="flex gap-4">
             {socialLinks.map((link) => (
               <a
@@ -68,7 +53,7 @@ export default function Footer() {
           <p className="text-sm text-foreground">
             © {new Date().getFullYear()} {user.name}. all rights reserved.
           </p>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );

@@ -1,30 +1,18 @@
-"use client";
-
 import { experiences } from "@/data/experience";
-import { motion } from "framer-motion";
 
 export default function Experience() {
   return (
     <section className="container p-4 flex flex-col gap-10 my-10">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
+      <div>
         <h2 className="text-6xl">experience</h2>
-      </motion.div>
+      </div>
 
       <div className="flex flex-col gap-12">
         {experiences
           .sort((a, b) => b.id - a.id)
-          .map((exp, index) => (
-            <motion.div
+          .map((exp) => (
+            <div
               key={exp.company}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group table-border pb-12 last:border-0"
             >
               <div className="flex flex-col gap-6">
@@ -55,7 +43,7 @@ export default function Experience() {
                         )}
                       </div>
 
-                      <p className="text-lg font-light leading-relaxed">
+                      <p className="text-base md:text-lg font-light leading-relaxed">
                         {role.description}
                       </p>
                     </div>
@@ -73,7 +61,7 @@ export default function Experience() {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
       </div>
     </section>

@@ -67,13 +67,13 @@ export default async function BlogPage({
           <h1 className="text-4xl md:text-6xl font-medium mb-4">
             {post.title}
           </h1>
-          <div className="flex flex-col md:flex-row md:items-center gap-4 text-sm text-gray-600">
+          <div className="flex flex-col md:flex-row md:items-center gap-4 text-sm text-foreground/60">
             <time>{post.date}</time>
             <div className="flex flex-wrap gap-2">
               {post.tags.map((tag: string) => (
                 <span
                   key={tag}
-                  className="px-2 py-1 border-[0.5px] border-black hover:bg-gray-200 transition-colors duration-200"
+                  className="px-2 py-1 border-[0.5px] border-foreground hover:bg-card transition-colors duration-200"
                 >
                   #{tag}
                 </span>
@@ -83,11 +83,11 @@ export default async function BlogPage({
         </header>
 
         <div
-          className="prose prose-lg max-w-none"
+          className="prose prose-lg dark:prose-invert max-w-none"
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         />
 
-        <footer className="mt-16 pt-8 border-t-[0.5px] border-black">
+        <footer className="mt-16 pt-8 border-t-[0.5px] border-foreground/20">
           <Link
             href="/#blog"
             className="inline-flex items-center gap-2 group text-lg"

@@ -3,11 +3,11 @@
 import Link from "next/link";
 import Button from "./ui/button";
 import { useConsoleVisibleStore } from "@/store/console";
-import { motion, AnimatePresence } from "framer-motion";
 import { useState, type ComponentType } from "react";
 import { user } from "@/data/general";
 import { Github, Twitter } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
+import { AnimatePresence, motion } from "framer-motion";
 
 const NavItem = ({ label, link }: { label: string; link: string }) => {
   const isExternal = !link.startsWith("/");
@@ -59,8 +59,8 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="container mx-auto flex flex-col md:flex-row justify-center md:justify-between items-center space-y-3 space-x-2 p-4">
-      <div className="flex flex-col md:flex-row items-center gap-2 md:gap-10">
+    <nav className="container mx-auto flex flex-col md:flex-row items-start md:items-center md:justify-between space-y-3 md:space-y-0 space-x-0 md:space-x-2 p-4">
+      <div className="flex flex-row items-center gap-3 md:gap-10 flex-wrap">
         <div className="flex items-center gap-3 md:gap-5 lg:gap-10">
           {navItems
             .filter((item) => !item.icon)
@@ -68,7 +68,7 @@ export default function Navbar() {
               <NavItem key={item.label} {...item} />
             ))}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {navItems
             .filter((item) => item.icon)
             .map((item) => {

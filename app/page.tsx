@@ -6,6 +6,7 @@ import Skills from "@/components/home/skills";
 import Experience from "@/components/home/experience";
 import Blog from "@/components/home/blog";
 import HomeUtilities from "@/components/home/utilities";
+import { GithubCalendar } from "@/components/home/github";
 import { getAllPostsMeta } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
   const posts = getAllPostsMeta();
 
   return (
@@ -38,6 +39,7 @@ export default function Home() {
         <Experience />
         <Blog posts={posts} />
         <HomeUtilities />
+        <GithubCalendar username="ankurgajurel" />
       </div>
     </main>
   );

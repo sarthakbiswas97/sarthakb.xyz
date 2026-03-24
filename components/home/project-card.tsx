@@ -4,14 +4,8 @@ import { useRouter } from "next/navigation";
 
 export default function HomeProjectCard({
   project,
-  onMouseEnter,
-  onMouseMove,
-  onMouseLeave,
 }: {
   project: Project;
-  onMouseEnter: (e: React.MouseEvent) => void;
-  onMouseMove: (e: React.MouseEvent) => void;
-  onMouseLeave: () => void;
 }) {
   const router = useRouter();
   return (
@@ -24,9 +18,6 @@ export default function HomeProjectCard({
         if (e.key === "Enter" || e.key === " ")
           router.push("/projects/" + project.id);
       }}
-      onMouseEnter={onMouseEnter}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
     >
       <div className="text-sm">{project.date}</div>
       <div className="col-span-2 text-sm">{project.name}</div>

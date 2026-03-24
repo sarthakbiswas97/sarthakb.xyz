@@ -1,18 +1,10 @@
-"use client";
-
 import { user } from "@/data/general";
-import { motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 
 export default function SpotifyEmbed() {
   return (
     <div id="musik" className="container p-4 flex flex-col gap-10 my-10">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
+      <div>
         <h2 className="text-6xl flex gap-2 items-end group">
           <span className="group-hover:underline">musik</span>
           <ArrowUp
@@ -20,7 +12,7 @@ export default function SpotifyEmbed() {
             className="group-hover:rotate-45 transition-transform duration-300"
           />
         </h2>
-      </motion.div>
+      </div>
 
       <iframe
         className="border-[12px]"

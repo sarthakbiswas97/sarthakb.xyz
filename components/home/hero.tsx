@@ -1,8 +1,5 @@
-"use client";
-
 import { ArrowUp } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { user } from "@/data/general";
 import { cn } from "@/lib/utils";
 
@@ -10,50 +7,50 @@ export default function Hero() {
   return (
     <section className="p-4 container my-10 md:my-16 lg:my-20">
       <div className="flex flex-col gap-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col gap-2"
-        >
+        <div className="flex flex-col gap-2">
           <div className="relative w-fit">
-            <h2 className="text-6xl md:text-8xl">{user.name}</h2>
+            <h2 className="text-6xl md:text-8xl font-instrument-serif">{user.name}</h2>
             <a
               href={user.openForWork ? user.socials.calcom : "#"}
               target={user.openForWork ? "_blank" : undefined}
             >
               <p
                 className={cn(
-                  "absolute -right-16 top-[50%] bottom-[50%] rotate-90 hover:underline text-xs",
+                  "hidden md:block absolute -right-16 top-[50%] bottom-[50%] rotate-90 hover:underline text-xs",
                   !user.openForWork && "line-through"
                 )}
               >
                 open for work
               </p>
             </a>
+            <div className="md:hidden flex items-baseline justify-between w-full mt-2">
+              <p className="text-xl font-normal">
+                {user.hero.subtitle}
+              </p>
+              <a
+                href={user.openForWork ? user.socials.calcom : "#"}
+                target={user.openForWork ? "_blank" : undefined}
+                className={cn(
+                  "text-xs hover:underline",
+                  !user.openForWork && "line-through"
+                )}
+              >
+                (open for work)
+              </a>
+            </div>
           </div>
-          <p className="text-xl md:text-4xl font-bodoni font-extralight tracking-tighter">
+          <p className="hidden md:block text-xl md:text-4xl font-bodoni font-extralight tracking-tighter">
             {user.hero.subtitle}
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="max-w-2xl"
-        >
+        <div className="pr-5 md:pr-0 md:max-w-3/5">
           <p className="text-lg md:text-xl font-light leading-relaxed">
             {user.hero.userExcerpt}
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className="flex flex-wrap gap-4"
-        >
+        <div className="flex flex-wrap gap-4">
           <Link
             href="/#projects"
             className="group flex items-center gap-2 text-lg hover:underline"
@@ -85,7 +82,7 @@ export default function Hero() {
               className="group-hover:rotate-45 transition-transform duration-300"
             />
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

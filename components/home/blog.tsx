@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import Link from "next/link";
 import { BlogPostMeta } from "@/lib/blog";
@@ -8,12 +5,7 @@ import { BlogPostMeta } from "@/lib/blog";
 export default function HomeBlog({ posts }: { posts: BlogPostMeta[] }) {
   return (
     <section id="blogs" className="container p-4 flex flex-col gap-10">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
+      <div>
         <Link href="/#blogs">
           <h2 className="text-6xl flex gap-2 items-end group">
             <span className="group-hover:underline">writes</span>
@@ -23,32 +15,26 @@ export default function HomeBlog({ posts }: { posts: BlogPostMeta[] }) {
             />
           </h2>
         </Link>
-      </motion.div>
+      </div>
 
       <div className="flex flex-col gap-8">
-        {posts.map((post, index) => (
-          <motion.div
-            key={post.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-          >
+        {posts.map((post) => (
+          <div key={post.id}>
             <a
               href={`/blog/${post.id}`}
-              className="group border-b-[0.5px] border-black pb-8 last:border-0"
+              className="group border-b-[0.5px] border-foreground/20 pb-8 last:border-0"
             >
               <div className="flex flex-col gap-2">
                 <div className="flex items-baseline gap-4">
                   <h3 className="text-2xl font-medium group-hover:underline">
                     {post.title}
                   </h3>
-                  <span className="text-sm text-gray-600">{post.date}</span>
+                  <span className="text-sm text-foreground/60">{post.date}</span>
                 </div>
                 <p className="text-lg font-light">{post.excerpt}</p>
               </div>
             </a>
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>

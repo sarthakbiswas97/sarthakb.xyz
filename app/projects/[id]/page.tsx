@@ -70,13 +70,13 @@ export default async function ProjectPage({
           <h1 className="text-4xl md:text-6xl font-medium mb-4">
             {project.name}
           </h1>
-          <div className="flex flex-col md:flex-row md:items-center gap-4 text-sm text-gray-600">
+          <div className="flex flex-col md:flex-row md:items-center gap-4 text-sm text-foreground/60">
             <time>{project.date}</time>
             <div className="flex flex-wrap gap-2">
               {project.technologies?.map((tag: string) => (
                 <span
                   key={tag}
-                  className="px-2 py-1 border-[0.5px] border-black hover:bg-gray-200 transition-colors duration-200"
+                  className="px-2 py-1 border-[0.5px] border-foreground hover:bg-card transition-colors duration-200"
                 >
                   #{tag}
                 </span>
@@ -85,7 +85,7 @@ export default async function ProjectPage({
           </div>
         </header>
 
-        <div className="prose prose-lg max-w-none">
+        <div className="prose prose-lg dark:prose-invert max-w-none">
           <p className="mb-6 font-light leading-relaxed">
             {project.description}
           </p>
@@ -96,6 +96,7 @@ export default async function ProjectPage({
                 href={project.links.demo}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="no-underline"
               >
                 <Button className="group flex items-center gap-2 text-sm">
                   <span>view demo</span>
@@ -111,6 +112,7 @@ export default async function ProjectPage({
                 href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="no-underline"
               >
                 <Button className="group flex items-center gap-2 text-sm">
                   <span>view source</span>

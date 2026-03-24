@@ -9,8 +9,7 @@ export const experiences = [
       "github actions",
       "nestjs",
       "next.js",
-      "tailwind css",
-    ],
+          ],
     roles: [
       {
         title: "software engineer",
@@ -30,54 +29,15 @@ export const experiences = [
   },
   {
     id: 1,
-    company: "a5it",
-    website: "https://a5it.com",
+    company: "consultancy",
+    website: "",
     stacks: [
-      "aws (s3, rds, ec2, ecs, ses, sqs)",
+      "aws",
       "digitalocean",
       "node.js",
       "express",
       "next.js",
       "react query",
-    ],
-    roles: [
-      {
-        title: "software engineer",
-        period: "february 2024 - november 2024",
-        type: "full time, remote",
-        description:
-          "reduced AWS costs by 57% through infrastructure optimization. migrated services from AWS to DigitalOcean. built ETL pipelines and CRUD APIs. contributed to main website and product development. managed various cloud services including S3, RDS, EC2, ECS, SES, and SQS.",
-      },
-    ],
-  },
-  // {
-  //   id: 2,
-  //   company: "qubitglobal",
-  //   website: "https://qubitglobal.io",
-  //   stacks: [
-  //     "React",
-  //     "Tailwind",
-  //     "React Query",
-  //     "useSWR",
-  //     "DigitalOcean (k8s)",
-  //   ],
-  //   roles: [
-  //     {
-  //       title: "frontend engineer",
-  //       period: "june 2024 - october 2024",
-  //       type: "consulting",
-  //       description:
-  //         "built frontend applications with focus on CRUD operations and analytics data visualization. worked with Go backend APIs and managed infrastructure on DigitalOcean Kubernetes.",
-  //     },
-  //   ],
-  // },
-  {
-    id: 3,
-    company: "resimator",
-    website: "https://resimator.fi",
-    stacks: [
-      "next.js",
-      "react",
       "graphql",
       "strapi",
       "framer motion",
@@ -85,7 +45,14 @@ export const experiences = [
     ],
     roles: [
       {
-        title: "frontend engineer",
+        title: "software engineer, a5it",
+        period: "february 2024 - november 2024",
+        type: "consulting",
+        description:
+          "reduced AWS costs by 57% through infrastructure optimization. migrated services from AWS to DigitalOcean. built ETL pipelines and CRUD APIs. contributed to main website and product development. managed various cloud services including S3, RDS, EC2, ECS, SES, and SQS.",
+      },
+      {
+        title: "frontend engineer, resimator",
         period: "march 2024 - october 2024",
         type: "consulting",
         description:
@@ -97,21 +64,14 @@ export const experiences = [
     id: 4,
     company: "artisai",
     website: "https://artisai.ie",
-    stacks: ["next.js", "tailwind css", "react query", "supabase", "aws"],
+    stacks: ["next.js", "react query", "supabase", "aws", "fastapi", "inngest"],
     roles: [
       {
-        title: "software engineer consultant",
-        period: "november 2025 - present",
-        type: "consulting",
-        description:
-          "helping build a survey research and analysis tool for a european company.",
-      },
-      {
         title: "software engineer",
-        period: "november 2024 - november 2025",
+        period: "november 2024 - present",
         type: "full time, remote",
         description:
-          "built a webapp for monitoring and analysing electric fleet vehicles data. worked with vapi and hume for voice research.",
+          "built a webapp for monitoring and analysing electric fleet vehicles data. worked with vapi and hume for voice research. helping build a survey research and analysis tool for a european company.",
       },
     ],
   },

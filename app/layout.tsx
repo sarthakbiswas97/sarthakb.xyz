@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, Hubot_Sans } from "next/font/google";
+import { Bodoni_Moda, Hubot_Sans, Instrument_Serif } from "next/font/google";
 import Navbar from "@/components/navbar";
 import Terminal from "@/components/terminal";
 import Footer from "@/components/footer";
@@ -18,9 +18,16 @@ const hubotSans = Hubot_Sans({
   subsets: ["latin"],
 });
 
+
 const bodoni = Bodoni_Moda({
   variable: "--font-bodoni",
   subsets: ["latin"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = siteMetadata;
@@ -62,7 +69,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${hubotSans.variable} ${bodoni.variable} antialiased`}>
+      <body className={`${hubotSans.variable} ${bodoni.variable} ${instrumentSerif.variable} antialiased`}>
         <PostHogProvider clientOptions={{ api_host: "/ingest" }}>
           <Providers>
             <Suspense fallback={null}>

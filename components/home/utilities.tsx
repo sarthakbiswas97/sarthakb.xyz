@@ -1,34 +1,11 @@
-"use client";
-
 import { ArrowUp } from "lucide-react";
 import Link from "next/link";
 import { utilities } from "@/data/utilities";
-import { motion } from "framer-motion";
-import { useState } from "react";
 
 export default function HomeUtilities() {
-  const [hoveredUtility, setHoveredUtility] = useState<{
-    url: string;
-    name: string;
-    x: number;
-    y: number;
-  } | null>(null);
-
-  const getOgImageUrl = (url: string) => {
-    if (url.includes("github.com")) {
-      return `https://opengraph.githubassets.com/1/${url.replace("https://github.com/", "")}`;
-    }
-    return `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`;
-  };
-
   return (
-    <section className="container p-4 flex flex-col gap-10 my-10">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
+    <section id="utilities" className="container p-4 flex flex-col gap-10 my-10">
+      <div>
         <Link href={"/#utilities"}>
           <h2 className="text-6xl flex gap-2 items-end group">
             <span className="group-hover:underline">utilities</span>
@@ -38,51 +15,24 @@ export default function HomeUtilities() {
             />
           </h2>
         </Link>
-      </motion.div>
+      </div>
 
-      <div className="overflow-x-auto">
-        <div className="flex flex-col gap-0 min-w-[600px]">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="table-border-header grid grid-cols-4 p-1 text-xs"
-          >
+      {/* Desktop table */}
+      <div className="hidden md:block">
+        <div className="flex flex-col gap-0">
+          <div className="table-border-header grid grid-cols-4 p-1 text-xs">
             <div>/ NAME</div>
             <div className="col-span-2">/ DESCRIPTION</div>
             <div>/ LANGUAGE</div>
-          </motion.div>
+          </div>
 
-          {utilities.map((utility, index) => (
-            <motion.div
-              key={utility.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-            >
+          {utilities.map((utility) => (
+            <div key={utility.id}>
               <a
                 href={utility.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="table-border grid grid-cols-4 p-2 group hover:bg-card transition-colors duration-200 font-light cursor-pointer block"
-                onMouseEnter={(e) =>
-                  setHoveredUtility({
-                    url: utility.url,
-                    name: utility.name,
-                    x: e.clientX,
-                    y: e.clientY,
-                  })
-                }
-                onMouseMove={(e) =>
-                  setHoveredUtility((prev) =>
-                    prev
-                      ? { ...prev, x: e.clientX, y: e.clientY }
-                      : null
-                  )
-                }
-                onMouseLeave={() => setHoveredUtility(null)}
               >
                 <div className="text-sm">{utility.name}</div>
                 <div className="col-span-2 text-sm">{utility.description}</div>
@@ -92,27 +42,33 @@ export default function HomeUtilities() {
                   </span>
                   <ArrowUp
                     size={20}
-                    className="group-hover:rotate-45 transition-transform duration-300 text-foreground hidden md:block"
+                    className="group-hover:rotate-45 transition-transform duration-300 text-foreground"
                   />
                 </div>
               </a>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
 
-      {hoveredUtility && (
-        <img
-          src={getOgImageUrl(hoveredUtility.url)}
-          alt={`${hoveredUtility.name} preview`}
-          className="fixed w-80 rounded-lg shadow-lg border border-foreground/20 pointer-events-none"
-          style={{
-            left: hoveredUtility.x + 16,
-            top: hoveredUtility.y + 16,
-            zIndex: 9999,
-          }}
-        />
-      )}
+      {/* Mobile cards */}
+      <div className="flex flex-col gap-0 md:hidden">
+        {utilities.map((utility) => (
+          <a
+            key={utility.id}
+            href={utility.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="table-border py-3 group font-light block"
+          >
+            <div className="flex items-baseline justify-between mb-1">
+              <span className="text-sm font-medium">{utility.name}</span>
+              <span className="text-xs text-foreground/50">{utility.language}</span>
+            </div>
+            <p className="text-sm text-foreground/70">{utility.description}</p>
+          </a>
+        ))}
+      </div>
     </section>
   );
 }
