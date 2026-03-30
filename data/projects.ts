@@ -5,6 +5,7 @@ export type Project = {
   type: string;
   date: string;
   hidePreview?: boolean;
+  featured?: boolean;
   description?: string;
   content?: string;
   links?: {
@@ -17,9 +18,75 @@ export type Project = {
     src: string;
     alt: string;
   }[];
+  features?: {
+    title: string;
+    description: string;
+  }[];
+  workflow?: string[];
 };
 
 export const projects: Project[] = [
+  {
+    id: 14,
+    name: "ryuk ai",
+    date: "march, 2026",
+    collabs: [],
+    type: "ai/saas",
+    featured: true,
+    description:
+      "talk to your database, get answers. connect any database, explore schemas visually, and generate reports through conversation.",
+    content:
+      "ryuk is a conversational data analytics platform. connect any postgresql, mysql, or data warehouse — credentials encrypted at rest. ryuk automatically discovers your schema, labels tables and columns, and tracks drift over time. ask questions in plain english and ryuk writes the sql, validates it, and runs it. step-by-step reasoning renders show exactly how queries and insights are generated. build metric collections, pin charts to live dashboards that stay in sync with your data, and export polished reports from any conversation or dashboard in one click to pdf.",
+    links: {
+      demo: "https://ryuk-ai.xyz",
+    },
+    technologies: [
+      "next.js",
+      "typescript",
+      "postgresql",
+      "sql generation",
+      "tool calling",
+      "schema discovery",
+    ],
+    features: [
+      {
+        title: "database connections",
+        description:
+          "connect any postgresql, mysql, or data warehouse. credentials encrypted at rest.",
+      },
+      {
+        title: "schema tracking",
+        description:
+          "automatic schema discovery with labeled tables and columns. tracks drift over time.",
+      },
+      {
+        title: "chat interface",
+        description:
+          "ask questions in plain english. ryuk writes the sql, validates it, and runs it.",
+      },
+      {
+        title: "reasoning engine",
+        description:
+          "step-by-step reasoning renders show exactly how queries and insights are generated.",
+      },
+      {
+        title: "dashboards",
+        description:
+          "build metric collections and pin charts. live dashboards that stay in sync with your data.",
+      },
+      {
+        title: "pdf export",
+        description:
+          "generate polished reports from any conversation or dashboard. one click to pdf.",
+      },
+    ],
+    workflow: [
+      "connect your database",
+      "ryuk maps your schema",
+      "ask anything",
+      "build and export",
+    ],
+  },
   {
     id: 13,
     name: "nepse-sdk",

@@ -70,7 +70,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${hubotSans.variable} ${bodoni.variable} ${instrumentSerif.variable} antialiased`}>
-        <PostHogProvider clientOptions={{ api_host: "/ingest" }}>
+        <PostHogProvider clientOptions={{ api_host: "/ingest", custom_campaign_params: ["ref"] }}>
           <Providers>
             <Suspense fallback={null}>
               <PostHogPageView />

@@ -8,9 +8,14 @@ export default function HomeProjectCard({
   project: Project;
 }) {
   const router = useRouter();
+
   return (
     <div
-      className="table-border grid grid-cols-5 px-3 py-1.5 group hover:bg-card transition-colors duration-200 font-light cursor-pointer"
+      className={`grid grid-cols-5 px-3 group transition-colors duration-200 font-light cursor-pointer ${
+        project.featured
+          ? "border-l-2 border-l-foreground bg-foreground/[0.03] py-2.5 hover:bg-foreground/[0.06]"
+          : "table-border py-1.5 hover:bg-card"
+      }`}
       onClick={() => router.push("/projects/" + project.id)}
       role="button"
       tabIndex={0}
@@ -20,7 +25,16 @@ export default function HomeProjectCard({
       }}
     >
       <div className="text-sm">{project.date}</div>
-      <div className="col-span-2 text-sm">{project.name}</div>
+      <div className="col-span-2 text-sm flex items-center gap-2">
+        <span className={project.featured ? "font-normal" : ""}>
+          {project.name}
+        </span>
+        {project.featured && (
+          <span className="text-[0.6rem] tracking-widest uppercase text-foreground/40 border border-foreground/15 px-1.5 py-px">
+            new
+          </span>
+        )}
+      </div>
       <div className="flex flex-wrap gap-2">
         {project.collabs.map((collab) => (
           <a

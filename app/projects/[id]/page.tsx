@@ -126,6 +126,50 @@ export default async function ProjectPage({
           </div>
 
           <p className="mb-6 font-light leading-relaxed">{project?.content}</p>
+
+          {project.workflow && project.workflow.length > 0 && (
+            <div className="mt-16 not-prose">
+              <h2 className="text-sm tracking-widest uppercase text-foreground/40 mb-6">
+                / how it works
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-px border border-foreground/10">
+                {project.workflow.map((step, i) => (
+                  <div
+                    key={i}
+                    className="p-4 border-r last:border-r-0 border-foreground/10"
+                  >
+                    <span className="text-xs text-foreground/30 block mb-2">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-sm font-light">{step}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {project.features && project.features.length > 0 && (
+            <div className="mt-16 not-prose">
+              <h2 className="text-sm tracking-widest uppercase text-foreground/40 mb-6">
+                / features
+              </h2>
+              <div className="flex flex-col gap-0">
+                {project.features.map((feature, i) => (
+                  <div
+                    key={i}
+                    className="border-b border-foreground/10 py-4 grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-8"
+                  >
+                    <div className="text-sm font-normal">
+                      {feature.title}
+                    </div>
+                    <div className="md:col-span-2 text-sm font-light text-foreground/70">
+                      {feature.description}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <footer className="mt-16 pt-8 border-t border-foreground/10">

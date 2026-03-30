@@ -49,11 +49,22 @@ export default function HomeProjects() {
         {projects.map((project) => (
           <div
             key={project.id}
-            className="table-border py-3 cursor-pointer"
+            className={
+              project.featured
+                ? "border-l-2 border-l-foreground bg-foreground/[0.03] py-3 pl-3 pr-1 cursor-pointer"
+                : "table-border py-3 cursor-pointer"
+            }
             onClick={() => router.push("/projects/" + project.id)}
           >
             <div className="flex items-baseline justify-between mb-1">
-              <span className="text-sm font-medium">{project.name}</span>
+              <span className={`text-sm flex items-center gap-2 ${project.featured ? "font-medium" : "font-medium"}`}>
+                {project.name}
+                {project.featured && (
+                  <span className="text-[0.6rem] tracking-widest uppercase text-foreground/40 border border-foreground/15 px-1.5 py-px">
+                    new
+                  </span>
+                )}
+              </span>
               <span className="text-xs text-foreground/50">{project.date}</span>
             </div>
             <div className="flex items-center justify-between">
