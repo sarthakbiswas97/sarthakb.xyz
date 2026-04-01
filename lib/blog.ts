@@ -22,6 +22,7 @@ export interface BlogPost extends BlogPostMeta {
 }
 
 export function getAllPostsMeta(): BlogPostMeta[] {
+  if (!fs.existsSync(contentDir)) return [];
   const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".md"));
 
   const posts = files.map((filename) => {
@@ -68,6 +69,7 @@ export async function getPostById(id: string): Promise<BlogPost | null> {
 }
 
 export function getAllPostIds(): string[] {
+  if (!fs.existsSync(contentDir)) return [];
   return fs
     .readdirSync(contentDir)
     .filter((f) => f.endsWith(".md"))
