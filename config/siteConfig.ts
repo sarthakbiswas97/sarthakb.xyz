@@ -6,22 +6,22 @@ export const siteConfig = {
   title: user.name + " - " + user.role,
   description:
     "Software engineer specializing in full-stack web development, AWS cloud infrastructure, and social media analytics. Building scalable applications with React, Next.js, and TypeScript.",
-  url: "https://ankurgajurel.com.np",
+  url: "https://sarthakb.xyz",
   ogImage: "/og.png",
   links: {
-    twitter: "https://twitter.com/ankurgajurel",
-    github: "https://github.com/ankurgajurel",
-    linkedin: "https://linkedin.com/in/ankurgajurel",
+    twitter: "https://twitter.com/overfitandchill",
+    github: "https://github.com/sarthakbiswas97",
+    linkedin: "https://linkedin.com/in/sarthak-biswas",
   },
-  creator: "@ankurgajurel",
+  creator: "@sarthakbiswas",
   authors: [
     {
-      name: "Ankur Gajurel",
-      url: "https://ankurgajurel.com.np",
+      name: "Sarthak Biswas",
+      url: "https://sarthakb.xyz",
     },
   ],
   keywords: [
-    "Ankur Gajurel",
+    "Sarthak Biswas",
     "Software Engineer",
     "Full Stack Developer",
     "Web Developer",
@@ -74,8 +74,8 @@ export const siteMetadata: Metadata = {
       template: `%s | ${siteConfig.name}`,
     },
     description: siteConfig.description,
-    site: "@ankurgajurel",
-    creator: "@ankurgajurel",
+    site: "@sarthakbiswas",
+    creator: "@sarthakbiswas",
     images: [siteConfig.ogImage],
   },
   robots: {

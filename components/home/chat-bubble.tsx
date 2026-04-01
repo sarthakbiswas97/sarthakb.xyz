@@ -53,7 +53,7 @@ export default function ChatBubble() {
           <div className="flex justify-between items-center p-6">
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 bg-green-500 animate-pulse"></div>
-              <h3 className="text-lg font-semibold">talk to ankur</h3>
+              <h3 className="text-lg font-semibold">talk to sarthak</h3>
             </div>
             <Button
               onClick={() => setIsOpen(false)}

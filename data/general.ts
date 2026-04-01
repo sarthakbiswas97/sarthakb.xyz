@@ -1,27 +1,26 @@
 export const user = {
-  name: "ankur gajurel",
-  location: "bhaktapur, nepal",
-  timezone: "Asia/Kathmandu",
-  postalCode: "44600",
+  name: "sarthak biswas",
+  location: "varanasi, india",
+  timezone: "Asia/Calcutta",
+  postalCode: "221001",
   role: "engineer",
   openForWork: true,
-  toolsWebsite: "https://tools.ankurgajurel.com.np",
   hero: {
     title: "",
     subtitle: "software engineer",
     userExcerpt:
-      "i build things. from web apps to ai products. currently working with rag, voice ai, and video generation.",
+      "everything across web, ml and infra",
   },
   footer: {
     subtitle: "software engineer",
   },
   socials: {
-    linkedin: "https://linkedin.com/in/ankurgajurel",
-    twitter: "https://twitter.com/ankurgajurel",
-    github: "https://github.com/ankurgajurel?tab=repositories",
-    mail: "mailto:ankurgajurel02@gmail.com",
-    calcom: "https://cal.com/gajurel",
+    linkedin: "https://linkedin.com/in/sarthak-biswas",
+    twitter: "https://twitter.com/overfitandchill",
+    github: "https://github.com/sarthakbiswas97?tab=repositories",
+    mail: "mailto:sarthak.sbiswas@gmail.com",
+    calcom: "https://cal.com/sbiswas",
   },
   playlist: "1YODNPvuFFJtpgvyxZnxYG",
-  hobbies: ["hiking", "travelling", "music", "guitar/piano", "coffee"],
+  hobbies: ["travel", "photography", "coffee"],
 };

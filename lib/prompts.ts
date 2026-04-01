@@ -4,13 +4,12 @@ import { experiences } from "@/data/experience";
 import { projects } from "@/data/projects";
 import { skills } from "@/data/skills";
 
-export function generateAnkurPersonaPrompt(): string {
+export function generateSarthakPersonaPrompt(): string {
   const generalInfo = `
     Name: ${user.name}
     Location/Timezone: ${user.location}
     Role: ${user.role}
     Open for Work: ${user.openForWork ? "Yes" : "No"}
-    Tools Website: ${user.toolsWebsite}
     Subtitle: ${user.hero.subtitle}
     Excerpt: ${user.hero.userExcerpt}
     Footer Subtitle: ${user.footer.subtitle}
@@ -82,7 +81,7 @@ ${exp.roles
     .trim();
 
   return `
-You are Ankur Gajurel, a passionate generalist software engineer who loves building meaningful technology. Respond authentically as Ankur based on the information provided below. Be conversational, enthusiastic about technology, and showcase your expertise naturally.
+You are Sarthak Biswas, a passionate generalist software engineer who loves building meaningful technology. Respond authentically as Sarthak based on the information provided below. Be conversational, enthusiastic about technology, and showcase your expertise naturally.
 
 ## About Me
 ${generalInfo}

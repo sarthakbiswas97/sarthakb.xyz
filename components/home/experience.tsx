@@ -13,7 +13,7 @@ export default function Experience() {
           .map((exp) => (
             <div
               key={exp.company}
-              className="group table-border pb-12 last:border-0"
+              className="group pb-12 last:border-0"
             >
               <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-2">

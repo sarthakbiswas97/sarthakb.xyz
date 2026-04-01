@@ -50,13 +50,15 @@ export default function Navbar() {
 
   const navItems: NavItemEntry[] = [
     { label: "home", link: "/" },
-    { label: "gallery", link: "/gallery" },
+    ...(process.env.GALLERY_JSON_ENDPOINT
+      ? [{ label: "gallery", link: "/gallery" }]
+      : []),
     { label: "resume", link: "/resume/resume.pdf" },
-    { label: "tools", link: user.toolsWebsite },
     { label: "cal.com", link: user.socials.calcom },
     { label: "twitter", link: user.socials.twitter, icon: Twitter },
     { label: "github", link: user.socials.github, icon: Github },
   ];
+
 
   return (
     <nav className="container mx-auto flex flex-col md:flex-row items-start md:items-center md:justify-between space-y-3 md:space-y-0 space-x-0 md:space-x-2 p-4">

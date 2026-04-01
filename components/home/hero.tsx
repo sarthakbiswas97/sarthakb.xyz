@@ -61,16 +61,6 @@ export default function Hero() {
               className="group-hover:rotate-45 transition-transform duration-300"
             />
           </Link>
-          <Link
-            href="/#blogs"
-            className="group flex items-center gap-2 text-lg hover:underline"
-          >
-            <span>writes</span>
-            <ArrowUp
-              size={20}
-              className="group-hover:rotate-45 transition-transform duration-300"
-            />
-          </Link>
           <a
             href={user.socials.calcom}
             target="_blank"

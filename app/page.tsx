@@ -5,7 +5,6 @@ import HomeProjects from "@/components/home/projects";
 import Skills from "@/components/home/skills";
 import Experience from "@/components/home/experience";
 import Blog from "@/components/home/blog";
-import HomeUtilities from "@/components/home/utilities";
 import { GithubCalendar } from "@/components/home/github";
 import { getAllPostsMeta } from "@/lib/blog";
 
@@ -37,9 +36,7 @@ export default async function Home() {
         <HomeProjects />
         <Skills />
         <Experience />
-        <Blog posts={posts} />
-        <HomeUtilities />
-        <GithubCalendar username="ankurgajurel" />
+        {posts.length > 0 && <Blog posts={posts} />}
       </div>
     </main>
   );
