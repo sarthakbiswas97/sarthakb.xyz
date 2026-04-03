@@ -88,42 +88,45 @@ export const projects: Project[] = [
   },
   {
     id: 2,
-    name: "research copilot",
-    date: "september, 2025",
+    name: "stock trader env",
+    date: "april, 2026",
     collabs: [],
-    type: "ai/platform",
+    type: "rl/env",
     description:
-      "ai-powered research copilot for engineers that unifies search across internal and external knowledge.",
+      "openenv reinforcement learning environment that simulates daily stock trading on indian equity markets for evaluating llm agents.",
     content:
-      "a scalable platform for engineers to query and ingest knowledge from multiple sources. features a gateway api with endpoints for natural language queries and content ingestion. built with a microservice architecture designed to support additional services like vector search and rag pipelines. includes strict dev tooling with ci, linting, type checking, and pre-commit hooks.",
+      "a real-world rl environment for llm agents to trade nifty stocks using real historical ohlcv data for 68 stocks spanning ~5 years. agents connect via http or websocket, receive market observations enriched with technical indicators (rsi, macd, bollinger bands, trend, momentum, volatility), and respond with plain-text trade actions. features three difficulty tiers — single stock, portfolio, and full autonomous — with increasing constraints like transaction costs, slippage, position limits, trade caps, and a regime gate that penalizes trading during market-wide downturns. includes step-level reward shaping with pnl reward, risk discipline bonus, and penalty signals.",
     links: {
-      github: "https://github.com/sarthakbiswas97/research-copilot",
+      github: "https://github.com/sarthakbiswas97/stock-trader-env",
     },
     technologies: [
       "python",
       "fastapi",
       "pydantic",
-      "postgresql",
       "docker",
-      "github actions",
-      "ruff",
-      "mypy",
+      "websocket",
+      "openenv",
     ],
     features: [
       {
-        title: "query endpoint",
+        title: "three difficulty tiers",
         description:
-          "natural language question interface with session tracking for contextual follow-ups.",
+          "single stock (easy), portfolio (medium), and full autonomous (hard) with escalating constraints like costs, slippage, position limits, and regime gates.",
       },
       {
-        title: "ingestion pipeline",
+        title: "real market data",
         description:
-          "accepts source urls or raw content for indexing into the knowledge base.",
+          "historical ohlcv data for 68 nifty stocks with technical indicators computed from a 50-day lookback window.",
       },
       {
-        title: "microservice architecture",
+        title: "llm-native interface",
         description:
-          "gateway-based design ready to scale with dedicated query and ingestion services.",
+          "plain-text action space (buy, sell, hold) and human-readable market summaries — any llm can act as an agent without special tooling.",
+      },
+      {
+        title: "reward shaping",
+        description:
+          "step-level rewards combining pnl, risk discipline bonus, regime gate penalty, trade limit violations, and invalid sell penalties.",
       },
     ],
   },
@@ -215,4 +218,5 @@ export const projects: Project[] = [
       },
     ],
   },
+  
 ];

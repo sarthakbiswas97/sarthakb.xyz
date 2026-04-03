@@ -70,11 +70,22 @@ export default function RootLayout({
         />
       </head>
       <body className={`${hubotSans.variable} ${bodoni.variable} ${instrumentSerif.variable} antialiased`}>
-        <PostHogProvider clientOptions={{ api_host: "/ingest", custom_campaign_params: ["ref"] }}>
+        {process.env.NEXT_PUBLIC_POSTHOG_KEY ? (
+          <PostHogProvider clientOptions={{ api_host: "/ingest", custom_campaign_params: ["ref"] }}>
+            <Providers>
+              <Suspense fallback={null}>
+                <PostHogPageView />
+              </Suspense>
+              <Navbar />
+              {children}
+              <Footer />
+              <Terminal />
+              {/* <ChatBubble /> */}
+              <Analytics />
+            </Providers>
+          </PostHogProvider>
+        ) : (
           <Providers>
-            <Suspense fallback={null}>
-              <PostHogPageView />
-            </Suspense>
             <Navbar />
             {children}
             <Footer />
@@ -82,7 +93,7 @@ export default function RootLayout({
             {/* <ChatBubble /> */}
             <Analytics />
           </Providers>
-        </PostHogProvider>
+        )}
       </body>
     </html>
   );

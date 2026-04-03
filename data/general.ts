@@ -9,7 +9,7 @@ export const user = {
     title: "",
     subtitle: "software engineer",
     userExcerpt:
-      "everything across web, ml and infra",
+      "i build things. web apps, ai products. currently working with rag and video generation.",
   },
   footer: {
     subtitle: "software engineer",

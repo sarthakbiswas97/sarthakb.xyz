@@ -29,7 +29,10 @@ export default function HomeProjects() {
           <div className="table-border-header grid grid-cols-5 p-1 text-xs text-foreground/50">
             <div>/ DATE</div>
             <div className="col-span-2">/ PROJECT</div>
-            <div>/ COLLABS</div>
+            {
+              projects.some((project) => project.collabs.length > 0) && <div>/ COLLABS</div>
+            }
+
             <div className="grid grid-cols-2">
               <div>/ TYPE</div>
               <div></div>
