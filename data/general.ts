@@ -3,16 +3,16 @@ export const user = {
   location: "varanasi, india",
   timezone: "Asia/Calcutta",
   postalCode: "221001",
-  role: "engineer",
+  role: "ai engineer",
   openForWork: true,
   hero: {
     title: "",
-    subtitle: "software engineer",
+    subtitle: "ai engineer",
     userExcerpt:
-      "i build things. web apps, ai products. currently working with rag and video generation.",
+      "i build ai systems that ship. llm pipelines powering 280k+ videos, trading agents backtested over 5 years, rl environments for training the next generation of autonomous agents.",
   },
   footer: {
-    subtitle: "software engineer",
+    subtitle: "ai engineer",
   },
   socials: {
     linkedin: "https://linkedin.com/in/sarthak-biswas",

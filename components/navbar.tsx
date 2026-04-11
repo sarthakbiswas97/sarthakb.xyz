@@ -5,7 +5,7 @@ import Button from "./ui/button";
 import { useConsoleVisibleStore } from "@/store/console";
 import { useState, type ComponentType } from "react";
 import { user } from "@/data/general";
-import { Github, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -55,6 +55,7 @@ export default function Navbar() {
       : []),
     { label: "resume", link: "/resume/resume.pdf" },
     { label: "cal.com", link: user.socials.calcom },
+    { label: "linkedin", link: user.socials.linkedin, icon: Linkedin },
     { label: "twitter", link: user.socials.twitter, icon: Twitter },
     { label: "github", link: user.socials.github, icon: Github },
   ];

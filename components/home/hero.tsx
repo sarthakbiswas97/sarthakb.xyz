@@ -14,14 +14,17 @@ export default function Hero() {
               href={user.openForWork ? user.socials.calcom : "#"}
               target={user.openForWork ? "_blank" : undefined}
             >
-              <p
+              <span
                 className={cn(
-                  "hidden md:block absolute -right-16 top-[50%] bottom-[50%] rotate-90 hover:underline text-xs",
+                  "hidden md:flex items-center gap-1.5 absolute -right-16 top-[50%] -translate-y-[50%] rotate-90 hover:underline text-xs whitespace-nowrap",
                   !user.openForWork && "line-through"
                 )}
               >
+                {user.openForWork && (
+                  <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                )}
                 open for work
-              </p>
+              </span>
             </a>
             <div className="md:hidden flex items-baseline justify-between w-full mt-2">
               <p className="text-xl font-normal">
@@ -32,6 +35,7 @@ export default function Hero() {
                 target={user.openForWork ? "_blank" : undefined}
                 className={cn(
                   "text-xs hover:underline",
+                  user.openForWork && "bg-emerald-300 dark:bg-emerald-500/50 px-1.5",
                   !user.openForWork && "line-through"
                 )}
               >

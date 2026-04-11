@@ -21,8 +21,15 @@ export default function HomeSkills() {
               className="table-border grid grid-cols-4 px-1 py-2 font-light"
             >
               <div className="text-sm">{skill.title}</div>
-              <div className="col-span-3 text-sm">
-                {skill.items.join(", ")}
+              <div className="col-span-3 text-sm flex flex-wrap gap-1.5">
+                {skill.items.map((item) => (
+                  <span
+                    key={item}
+                    className="hover:bg-foreground hover:text-background px-1.5 py-0.5 rounded transition-colors duration-200 cursor-default"
+                  >
+                    {item}
+                  </span>
+                ))}
               </div>
             </div>
           ))}
@@ -34,7 +41,16 @@ export default function HomeSkills() {
         {skills.map((skill) => (
           <div key={skill.id} className="table-border pb-4 font-light">
             <div className="text-xs text-foreground/50 mb-1">/ {skill.title.toUpperCase()}</div>
-            <div className="text-sm">{skill.items.join(", ")}</div>
+            <div className="text-sm flex flex-wrap gap-1.5">
+              {skill.items.map((item) => (
+                <span
+                  key={item}
+                  className="hover:bg-foreground hover:text-background px-1.5 py-0.5 rounded transition-colors duration-200 cursor-default"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
         ))}
       </div>

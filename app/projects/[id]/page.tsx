@@ -86,7 +86,7 @@ export default async function ProjectPage({
         </header>
 
         <div className="prose prose-lg dark:prose-invert max-w-none">
-          <p className="mb-6 font-light leading-relaxed">
+          <p className="mb-6 text-lg md:text-xl font-light leading-relaxed text-foreground/80">
             {project.description}
           </p>
 
@@ -125,7 +125,29 @@ export default async function ProjectPage({
             )}
           </div>
 
-          <p className="mb-6 font-light leading-relaxed">{project?.content}</p>
+          {project?.contentSections ? (
+            <div className="flex flex-col gap-10 mb-6">
+              {project.contentSections.map((section, i) => (
+                <div key={i}>
+                  <h3 className="text-sm tracking-widest uppercase text-foreground/40 mb-4">
+                    / {section.title}
+                  </h3>
+                  <ul className="flex flex-col gap-2">
+                    {section.items.map((item, j) => (
+                      <li
+                        key={j}
+                        className="text-sm md:text-base font-light leading-relaxed text-foreground/80 pl-4 border-l-2 border-foreground/10"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="mb-6 font-light leading-relaxed">{project?.content}</p>
+          )}
 
           {project.workflow && project.workflow.length > 0 && (
             <div className="mt-16 not-prose">

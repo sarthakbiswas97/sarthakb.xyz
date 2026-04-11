@@ -34,6 +34,7 @@ export default function Footer() {
             {user.name}
           </Link>
           <p className="text-sm text-foreground">{user.footer.subtitle}</p>
+          <p className="text-xs text-foreground/50">building in public · <a href={user.socials.twitter} target="_blank" className="hover:text-foreground transition-colors duration-200">@overfitandchill</a></p>
         </div>
 
         <div className="flex flex-col gap-4">

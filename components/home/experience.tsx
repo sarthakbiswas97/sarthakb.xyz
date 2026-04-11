@@ -1,4 +1,56 @@
+"use client";
+
+import { useRef, useState, useEffect } from "react";
 import { experiences } from "@/data/experience";
+
+function RoleDetails({
+  details,
+}: {
+  details: { title: string; description: string }[];
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setHeight(contentRef.current.scrollHeight);
+    }
+  }, [isOpen, details]);
+
+  return (
+    <div className="flex flex-col gap-3">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 text-sm hover:underline cursor-pointer w-fit"
+      >
+        <span>{isOpen ? "show less" : "read more"}</span>
+        <span
+          className="transition-transform duration-300"
+          style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+        >
+          ↓
+        </span>
+      </button>
+
+      <div
+        className="overflow-hidden transition-all duration-500 ease-in-out"
+        style={{ maxHeight: isOpen ? `${height}px` : "0px", opacity: isOpen ? 1 : 0 }}
+      >
+        <div ref={contentRef} className="flex flex-col gap-6 mt-2">
+          {details.map((detail, i) => (
+            <div key={i} className="flex flex-col gap-1.5">
+              <h4 className="text-base font-medium">{detail.title}</h4>
+              <p className="text-sm md:text-base font-light leading-relaxed text-foreground/70">
+                {detail.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Experience() {
   return (
@@ -46,6 +98,10 @@ export default function Experience() {
                       <p className="text-base md:text-lg font-light leading-relaxed">
                         {role.description}
                       </p>
+
+                      {role.details && role.details.length > 0 && (
+                        <RoleDetails details={role.details} />
+                      )}
                     </div>
                   ))}
                 </div>

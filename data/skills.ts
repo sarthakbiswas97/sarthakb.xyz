@@ -6,23 +6,33 @@ export interface Skill {
 
 export const skills: Skill[] = [
   {
+    id: "ai-ml",
+    title: "ai / machine learning",
+    items: ["PyTorch", "Hugging Face", "Scikit-learn", "Unsloth AI", "LLMs", "NLP", "Reinforcement Learning"],
+  },
+  {
+    id: "training-techniques",
+    title: "training / techniques",
+    items: ["SFT", "DPO", "RAG", "Prompt Engineering", "LLM Fine-tuning", "Data Pipelines"],
+  },
+  {
+    id: "data-libraries",
+    title: "data / libraries",
+    items: ["Pandas", "NumPy", "OpenCV", "NLTK", "Matplotlib"],
+  },
+  {
+    id: "backend-databases",
+    title: "backend / databases",
+    items: ["FastAPI", "Celery", "Redis", "PostgreSQL", "Vector Databases"],
+  },
+  {
     id: "cloud-devops",
-    title: "cloud",
-    items: ["AWS", "DigitalOcean", "GitHub Actions", "Docker", "Kubernetes"],
-  },
-  {
-    id: "frontend",
-    title: "frontend",
-    items: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "React Query"],
-  },
-  {
-    id: "backend",
-    title: "backend",
-    items: ["Node.js", "Express", "Nest.js", "GraphQL", "PostgreSQL", "Strapi"],
+    title: "cloud / devops / mlops",
+    items: ["AWS/GCP", "DigitalOcean", "Docker", "vLLM", "CI/CD", "GitHub Actions"],
   },
   {
     id: "languages-tools",
-    title: "language & tools",
-    items: ["TypeScript", "JavaScript", "Go", "Git", "Linux", "Vim"],
+    title: "languages & tools",
+    items: ["Python", "TypeScript", "Git", "Linux", "Vim"],
   },
 ];

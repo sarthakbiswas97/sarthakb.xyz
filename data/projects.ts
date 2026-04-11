@@ -8,6 +8,10 @@ export type Project = {
   featured?: boolean;
   description?: string;
   content?: string;
+  contentSections?: {
+    title: string;
+    items: string[];
+  }[];
   links?: {
     github?: string;
     demo?: string;
@@ -28,74 +32,50 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: 1,
-    name: "trader",
-    date: "march, 2026",
-    collabs: [],
-    type: "fullstack/ml",
-    featured: true,
-    description:
-      "autonomous trading system for indian equity markets using short-term mean-reversion on nifty 100 stocks.",
-    content:
-      "multi-engine autonomous trading system targeting nifty 50 and nifty 100 stocks. uses a short-term mean-reversion strategy — identifies stocks with the largest declines over a 5-21 day lookback and bets on a rebound within 5 trading days. features a regime classifier (bull/neutral/weak) that dynamically adjusts capital allocation using information coefficient, win rate, momentum, and market breadth. includes risk management layers with drawdown dampening, recovery boost, and kill switches. integrates with zerodha kite connect for live/paper trading. backtested over 5.4 years with 54-58% win rate and +40% combined returns.",
-    links: {
-      github: "https://github.com/sarthakbiswas97/trader",
-      demo: "https://trader-wine-omega.vercel.app",
-    },
-    technologies: [
-      "python",
-      "fastapi",
-      "next.js",
-      "typescript",
-      "tailwind css",
-      "neon postgres",
-      "docker",
-      "github actions",
-      "zerodha kite connect",
-    ],
-    features: [
-      {
-        title: "multi-engine design",
-        description:
-          "separate engines for large-cap (nifty 50) and midcap (nifty 100) universes with independent strategies.",
-      },
-      {
-        title: "regime classifier",
-        description:
-          "categorizes market conditions as bull, neutral, or weak and dynamically adjusts capital allocation.",
-      },
-      {
-        title: "risk management",
-        description:
-          "regime-based exposure gates, drawdown dampening curves, recovery boost, and kill switches on declining win rates.",
-      },
-      {
-        title: "paper trading",
-        description:
-          "full paper trading mode that logs trades, snapshots, stock rankings, and regime transitions daily.",
-      },
-      {
-        title: "dashboard",
-        description:
-          "real-time frontend with market status, regime display, pnl tracking, price charts, and replay mode.",
-      },
-    ],
-    workflow: [
-      "regime classifier evaluates market conditions",
-      "stock ranker identifies top reversal candidates",
-      "risk guardian validates exposure limits",
-      "trade executor places orders via zerodha",
-    ],
-  },
-  {
-    id: 2,
-    name: "stock trader env",
+    name: "stock trader rl environment",
     date: "april, 2026",
     collabs: [],
-    type: "rl/env",
+    type: "rl/ml",
+    featured: true,
     description:
-      "openenv reinforcement learning environment that simulates daily stock trading on indian equity markets for evaluating llm agents.",
-    content:
-      "a real-world rl environment for llm agents to trade nifty stocks using real historical ohlcv data for 68 stocks spanning ~5 years. agents connect via http or websocket, receive market observations enriched with technical indicators (rsi, macd, bollinger bands, trend, momentum, volatility), and respond with plain-text trade actions. features three difficulty tiers — single stock, portfolio, and full autonomous — with increasing constraints like transaction costs, slippage, position limits, trade caps, and a regime gate that penalizes trading during market-wide downturns. includes step-level reward shaping with pnl reward, risk discipline bonus, and penalty signals.",
+      "openenv-compliant reinforcement learning environment for evaluating llm trading agents on indian equity markets. finalist at the meta pytorch openenv hackathon (top tier out of 52,000+ registrants).",
+    contentSections: [
+      {
+        title: "what it does",
+        items: [
+          "simulates daily stock trading on 68 nifty stocks using ~5 years of real historical ohlcv data",
+          "agents connect via http/websocket, receive market observations with technical indicators, and respond with plain-text trade actions (buy, sell, hold)",
+          "three difficulty tiers: single stock (20 days), portfolio (30 days), full autonomous (40 days) — each with escalating constraints like transaction costs, slippage, position limits, and regime gates",
+        ],
+      },
+      {
+        title: "how it works",
+        items: [
+          "market simulator replays historical price windows with a 50-day lookback buffer for indicator computation",
+          "feature engine computes rsi, macd, bollinger bands, volume spikes, trend, momentum, and volatility — served as human-readable text summaries for llm agents",
+          "step-level reward shaping: pnl reward, discipline bonus, regime gate penalty, trade limit violations",
+          "task-specific graders score the full trajectory on sharpe ratio, discipline, regime compliance, and risk management",
+        ],
+      },
+      {
+        title: "why it matters — rlvr & grpo",
+        items: [
+          "the grading system is designed as a verifiable reward function (rlvr) — deterministic scores that replace traditional reward models",
+          "this enables grpo-based training: generate multiple rollouts through the environment, rank them by grader score, and update model weights to favor better trading trajectories",
+          "no separate reward model or critic needed — the environment's graders are the reward signal",
+          "the trader agent project is the target policy model — the goal is to train it using this environment's verifiable rewards to improve its trading decisions",
+        ],
+      },
+      {
+        title: "what's next (in progress)",
+        items: [
+          "integrating with unsloth/trl for grpo-based rl training of the trader agent",
+          "vllm deployment for inference optimization during rollout generation",
+          "data pipeline for collecting and processing thousands of training rollouts",
+          "the environment (phase 1) is complete — now building the training loop (phase 2)",
+        ],
+      },
+    ],
     links: {
       github: "https://github.com/sarthakbiswas97/stock-trader-env",
     },
@@ -106,117 +86,219 @@ export const projects: Project[] = [
       "docker",
       "websocket",
       "openenv",
+      "hugging face spaces",
     ],
     features: [
       {
-        title: "three difficulty tiers",
+        title: "meta pytorch hackathon finalist",
         description:
-          "single stock (easy), portfolio (medium), and full autonomous (hard) with escalating constraints like costs, slippage, position limits, and regime gates.",
+          "selected for the grand finale (april 25-26, 2026 in bangalore) out of 52,000+ registered developers. presenting directly to meta engineers.",
       },
       {
-        title: "real market data",
+        title: "three difficulty tiers",
         description:
-          "historical ohlcv data for 68 nifty stocks with technical indicators computed from a 50-day lookback window.",
+          "single stock (easy, 20 days), portfolio (medium, 30 days), and full autonomous (hard, 40 days) with escalating constraints — transaction costs, slippage, position limits, trade caps, and regime gates.",
+      },
+      {
+        title: "verifiable reward design (rlvr)",
+        description:
+          "deterministic grading functions that score agents on sharpe ratio, discipline, regime compliance, and risk management. designed to serve as verifiable rewards for grpo-based rl training — no separate reward model needed.",
+      },
+      {
+        title: "real market data & technical analysis",
+        description:
+          "68 nifty stocks with ~5 years of daily ohlcv data. featureengine computes rsi, macd, bollinger bands, volume spikes, trend, momentum, and volatility from a 50-day lookback buffer.",
       },
       {
         title: "llm-native interface",
         description:
-          "plain-text action space (buy, sell, hold) and human-readable market summaries — any llm can act as an agent without special tooling.",
+          "plain-text action space (buy, sell, hold) and human-readable market summaries — any llm can act as an agent without special tooling. invalid actions gracefully default to hold.",
       },
       {
-        title: "reward shaping",
+        title: "seed-reproducible episodes",
         description:
-          "step-level rewards combining pnl, risk discipline bonus, regime gate penalty, trade limit violations, and invalid sell penalties.",
+          "fully deterministic episodes for reproducible evaluation. same seed produces same market window and sequence.",
       },
+    ],
+    workflow: [
+      "agent connects via http/websocket and resets environment with a task and seed",
+      "environment selects a random market window and returns initial observation",
+      "agent reads market summary with technical indicators and submits trade action",
+      "environment executes trade with realistic costs/slippage, computes reward, advances to next day",
+      "at episode end, grader scores the full trajectory on task-specific criteria",
+    ],
+  },
+  {
+    id: 2,
+    name: "autonomous trader agent",
+    date: "march, 2026",
+    collabs: [],
+    type: "ml/quant",
+    featured: true,
+    description:
+      "autonomous trading system for indian equity markets using cross-sectional reversal scoring on 96 nifty stocks. backtested 8.6% cagr with 60% win rate over 5.4 years.",
+    contentSections: [
+      {
+        title: "the strategy",
+        items: [
+          "cross-sectional reversal — ranks 96 nifty stocks by magnitude of decline over a 5-21 day lookback, buys the most oversold, holds for 5 trading days",
+          "the edge is behavioral: panic selling pushes stocks below fair value, creating a mean-reversion opportunity that algorithms can't easily arbitrage away",
+          "information coefficient: +0.020 (large-cap), +0.025 (midcap) — a small but consistent edge compounded over thousands of trades",
+        ],
+      },
+      {
+        title: "research journey",
+        items: [
+          "tested 6 strategies systematically before finding the edge",
+          "5 failed: intraday ml prediction, breakout detection, 5-min mean reversion, 30-min trend following, cross-sectional ml — indian large-cap stocks are too efficient at intraday resolution",
+          "daily reversal was the only signal that survived — driven by human psychology, not technical patterns",
+          "evolved through 4 versions of allocation logic, each improving capital efficiency — the underlying signal never changed",
+        ],
+      },
+      {
+        title: "how it works",
+        items: [
+          "3-state regime classifier (bull/neutral/weak) using nifty vs 50-dma, momentum, and market breadth with a 2-day persistence filter",
+          "adaptive confidence scoring: continuous 0-1 score combining ic, rolling win rate, momentum, and breadth for smooth capital allocation",
+          "risk controls: regime-based exposure gates, soft drawdown dampening, recovery boost, kill switches on declining win rates or negative ic, panic filters",
+          "a/b pipeline testing with independent scan intervals, capital pools, and paper broker instances for isolated comparison",
+        ],
+      },
+      {
+        title: "results",
+        items: [
+          "backtested over 5.4 years (oct 2020 – jan 2025): 8.6% cagr, 42% total return, 60% win rate",
+          "survived the 2025-26 bear market with 6.5% cagr and 9-16% max drawdown",
+          "large-cap returns: +38% | midcap returns: +108% (2.8x higher)",
+          "~52% average capital deployment — the rest held as a protective cash buffer",
+        ],
+      },
+      {
+        title: "what's next",
+        items: [
+          "this is the target policy model for rl training — the stock-trader-env project provides the verifiable reward environment",
+          "goal: use grpo to train the agent's decision-making on thousands of simulated rollouts, optimizing for sharpe ratio and risk discipline",
+          "replacing rule-based scoring with a learned policy that adapts to market conditions",
+        ],
+      },
+    ],
+    links: {
+      github: "https://github.com/sarthakbiswas97/trader",
+      demo: "https://trader.sarthakb.xyz",
+    },
+    technologies: [
+      "python",
+      "fastapi",
+      "postgresql",
+      "docker",
+      "github actions",
+      "zerodha kite connect",
+    ],
+    features: [
+      {
+        title: "cross-sectional reversal scoring",
+        description:
+          "ranks 96 nifty stocks by decline magnitude. information coefficient: +0.020 (large-cap), +0.025 (midcap). exploits behavioral overreaction — a structural edge driven by psychology, not patterns algorithms can arbitrage away.",
+      },
+      {
+        title: "3-state regime classifier",
+        description:
+          "classifies market as bull (65-85% exposure), neutral (50-75%), or weak (8-40%) using nifty vs 50-dma, momentum, and breadth. 2-day persistence filter prevents whipsawing.",
+      },
+      {
+        title: "adaptive confidence scoring",
+        description:
+          "continuous 0-1 scoring combining information coefficient, rolling win rate, momentum, and market breadth. replaces hard thresholds for smoother capital allocation.",
+      },
+      {
+        title: "a/b pipeline testing",
+        description:
+          "two independent pipelines with separate scan intervals and capital pools. each pipeline runs its own paper broker instance for isolated comparison.",
+      },
+      {
+        title: "risk management layers",
+        description:
+          "regime-based exposure gates, soft drawdown dampening (gentle in bull, aggressive in weak), recovery boost when signal improves during drawdown recovery, and kill switches that pause trading on declining win rates or negative ic.",
+      },
+      {
+        title: "research-driven development",
+        description:
+          "tested 6 strategies systematically before finding the edge. 5 failed (ml prediction, breakouts, intraday mean reversion, trend following, cross-sectional ml). every version improvement came from better capital allocation — the signal never changed.",
+      },
+    ],
+    workflow: [
+      "regime classifier evaluates market conditions (bull/neutral/weak)",
+      "confidence scorer computes allocation weight from ic, win rate, momentum, breadth",
+      "reversal scanner ranks stocks by decline magnitude across lookback windows",
+      "risk guardian validates exposure limits, drawdown gates, and kill switches",
+      "trade executor places orders via zerodha kite connect (cnc for swing holding)",
     ],
   },
   {
     id: 3,
-    name: "opinion trading",
-    date: "october, 2024",
+    name: "ryuk ai",
+    date: "march, 2026",
     collabs: [],
-    type: "backend",
+    type: "ai/backend",
     description:
-      "event-based opinion trading platform backend with in-memory order book and real-time websocket updates.",
-    content:
-      "backend for an opinion/event trading platform similar to probo or polymarket. users trade yes/no shares on event outcomes with a full in-memory order book and matching engine. uses a task queue pattern — express api pushes tasks to redis, a worker processes them against in-memory state, and results are published back via pub/sub. includes real-time websocket updates so clients get live order book changes. supports user management, inr on-ramp, order placement, minting, and balance queries.",
+      "conversational database analytics platform using llm tool-calling to translate natural language into validated sql.",
+    contentSections: [
+      {
+        title: "what it does",
+        items: [
+          "connects to any database (postgresql, mysql) and lets users query data using natural language instead of writing sql",
+          "translates questions into validated sql using llm tool-calling, executes them, and visualizes results — all in a conversational interface",
+          "step-by-step reasoning visualization shows exactly how the query was generated, so users can verify and trust the results",
+        ],
+      },
+      {
+        title: "how it works",
+        items: [
+          "llm tool-calling architecture: the model decides which tools to call (schema lookup, sql generation, validation) based on the user's question",
+          "automatic schema discovery — connects to the database, maps tables and columns, tracks schema drift over time",
+          "read-only mode and encrypted credential storage — databases are never modified through the platform",
+        ],
+      },
+      {
+        title: "analytics & reporting",
+        items: [
+          "live dashboards with pinned charts that stay in sync with the underlying data",
+          "searchable conversation history — go back to any previous query and its results",
+          "one-click pdf report export for sharing insights with stakeholders",
+        ],
+      },
+    ],
     links: {
-      github: "https://github.com/sarthakbiswas97/opinion-trading",
+      demo: "https://ryuk-ai.xyz",
     },
     technologies: [
-      "javascript",
-      "express",
-      "redis",
-      "websocket",
-      "prisma",
+      "fastapi",
+      "litellm",
+      "inngest",
       "postgresql",
-      "jest",
-      "bun",
-    ],
-    features: [
-      {
-        title: "order book engine",
-        description:
-          "full matching engine for yes/no shares with price levels summing to 10. handles buy/sell matching and order reversal.",
-      },
-      {
-        title: "task queue architecture",
-        description:
-          "redis-backed task queue with pub/sub for decoupled api and worker processing.",
-      },
-      {
-        title: "real-time updates",
-        description:
-          "websocket server pushes live order book changes to subscribed clients per symbol.",
-      },
-      {
-        title: "user & balance management",
-        description:
-          "user creation, inr on-ramp, stock minting, and balance/locked tracking.",
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: "vps deploy guide",
-    date: "april, 2026",
-    collabs: [],
-    type: "docs/fullstack",
-    description:
-      "interactive documentation site teaching end-to-end deployment of dockerized projects to a vps.",
-    content:
-      "a 9-chapter guide covering the full deployment pipeline: ci/cd with github actions pushing to ghcr, vps setup, docker, nginx reverse proxy, ssl with certbot, dns configuration, auto-deploy via ssh, and operations/maintenance. built as a next.js documentation site with mdx content, syntax highlighting, sidebar navigation, search, and an integrated ai chatbot powered by groq (llama 3.3 70b) that can answer questions grounded in the guide content.",
-    links: {
-      github: "https://github.com/sarthakbiswas97/devops-learning",
-      demo: "https://devops.sarthakb.xyz",
-    },
-    technologies: [
       "next.js",
-      "typescript",
-      "tailwind css",
-      "mdx",
-      "shiki",
-      "groq",
-      "vercel ai sdk",
-      "bun",
     ],
     features: [
       {
-        title: "9-chapter guide",
+        title: "llm tool-calling architecture",
         description:
-          "covers ci/cd, docker, nginx, ssl, dns, auto-deploy, and operations from scratch.",
+          "translates natural language queries into validated sql using llm tool-calling. step-by-step reasoning visualization shows the query generation logic.",
       },
       {
-        title: "ai chatbot",
+        title: "automatic schema discovery",
         description:
-          "integrated chatbot using groq with llama 3.3 70b, grounded in the documentation content.",
+          "connects to databases, discovers tables and columns automatically, tracks schema drift over time.",
       },
       {
-        title: "rich documentation ux",
+        title: "safe database exploration",
         description:
-          "sidebar navigation, table of contents, breadcrumbs, search, code copy, and prev/next navigation.",
+          "read-only mode, encrypted credential storage. databases are never modified through the platform.",
+      },
+      {
+        title: "dashboards & reporting",
+        description:
+          "live dashboards with pinned charts, searchable conversation history, and one-click pdf report export.",
       },
     ],
   },
-  
 ];
