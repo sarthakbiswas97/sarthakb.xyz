@@ -12,7 +12,7 @@ export default function HomeProjects() {
   return (
     <section className="container p-4 flex flex-col gap-10 my-10">
       <div>
-        <Link href={"/#projects"}>
+        <Link href={"/projects"}>
           <h2 className="text-6xl flex gap-2 items-end group">
             <span className="group-hover:underline">projects</span>
             <ArrowUp
