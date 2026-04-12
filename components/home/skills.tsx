@@ -1,10 +1,20 @@
+import { ArrowUp } from "lucide-react";
+import Link from "next/link";
 import { skills } from "@/data/skills";
 
 export default function HomeSkills() {
   return (
     <section className="container p-4 flex flex-col gap-10 my-10">
       <div>
-        <h2 className="text-6xl">skills</h2>
+        <Link href={"/#skills"}>
+          <h2 className="text-6xl flex gap-2 items-end group">
+            <span className="group-hover:underline">skills</span>
+            <ArrowUp
+              size={48}
+              className="group-hover:rotate-45 transition-transform duration-300"
+            />
+          </h2>
+        </Link>
       </div>
 
       {/* Desktop table */}

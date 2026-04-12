@@ -33,9 +33,9 @@ export default async function Home() {
     <main className="relative">
       <Hero />
       <div className="relative z-10 bg-background">
+        <Experience />
         <HomeProjects />
         <Skills />
-        <Experience />
         {posts.length > 0 && <Blog posts={posts} />}
       </div>
     </main>
