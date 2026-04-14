@@ -53,6 +53,7 @@ export default function Navbar() {
     ...(process.env.GALLERY_JSON_ENDPOINT
       ? [{ label: "gallery", link: "/gallery" }]
       : []),
+    { label: "writes", link: "/writes" },
     { label: "resume", link: "/resume/resume.pdf" },
     { label: "cal.com", link: user.socials.calcom },
     { label: "linkedin", link: user.socials.linkedin, icon: Linkedin },

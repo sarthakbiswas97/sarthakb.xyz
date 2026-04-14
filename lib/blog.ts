@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -15,6 +16,7 @@ export interface BlogPostMeta {
   excerpt: string;
   date: string;
   tags: string[];
+  ogImage?: string;
 }
 
 export interface BlogPost extends BlogPostMeta {
@@ -36,6 +38,7 @@ export function getAllPostsMeta(): BlogPostMeta[] {
       excerpt: data.excerpt,
       date: data.date,
       tags: data.tags ?? [],
+      ogImage: data.ogImage,
     } as BlogPostMeta;
   });
 
@@ -53,6 +56,7 @@ export async function getPostById(id: string): Promise<BlogPost | null> {
 
   const result = await unified()
     .use(remarkParse)
+    .use(remarkGfm)
     .use(remarkRehype)
     .use(rehypePrettyCode, { theme: "github-light" })
     .use(rehypeStringify)
@@ -64,6 +68,7 @@ export async function getPostById(id: string): Promise<BlogPost | null> {
     excerpt: data.excerpt,
     date: data.date,
     tags: data.tags ?? [],
+    ogImage: data.ogImage,
     contentHtml: String(result),
   };
 }

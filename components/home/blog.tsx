@@ -6,7 +6,7 @@ export default function HomeBlog({ posts }: { posts: BlogPostMeta[] }) {
   return (
     <section id="blogs" className="container p-4 flex flex-col gap-10">
       <div>
-        <Link href="/#blogs">
+        <Link href="/writes">
           <h2 className="text-6xl flex gap-2 items-end group">
             <span className="group-hover:underline">writes</span>
             <ArrowUp
