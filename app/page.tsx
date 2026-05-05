@@ -33,10 +33,10 @@ export default async function Home() {
     <main className="relative">
       <Hero />
       <div className="relative z-10 bg-background">
+        {posts.length > 0 && <Blog posts={posts} />}
         <Experience />
         <HomeProjects />
         <Skills />
-        {posts.length > 0 && <Blog posts={posts} />}
       </div>
     </main>
   );

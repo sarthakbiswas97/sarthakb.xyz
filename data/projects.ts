@@ -32,6 +32,103 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: 1,
+    name: "nyc eta engine",
+    date: "may, 2026",
+    collabs: [],
+    type: "ml/deep learning",
+    featured: true,
+    description:
+      "neural eta prediction engine for nyc taxi trips. 560k-param embedding network trained on 37m trips achieves 264.5s mae — 25% better than xgboost baseline, inference under 1ms.",
+    contentSections: [
+      {
+        title: "what it does",
+        items: [
+          "predicts taxi trip duration given pickup zone, dropoff zone, timestamp, and passenger count using 37 million real nyc yellow taxi trips from 2023",
+          "learns all spatial relationships from trip data via zone embeddings — no external geography, shapefiles, or hardcoded coordinates. if zone ids mapped to a different city, the model would work equally well",
+          "serves predictions in under 1ms on cpu, packaged in a ~500mb docker container for submission",
+        ],
+      },
+      {
+        title: "the model",
+        items: [
+          "dual-branch architecture: zone embeddings (pickup + dropoff + hash-based pair embedding) processed through an interaction mlp, and 24 continuous features (zone-pair statistics + temporal) through a separate branch",
+          "element-wise embedding product captures zone similarity (co-occurrence), element-wise difference captures trip directionality (a→b vs b→a)",
+          "residual blocks in the combined mlp for stable gradient flow through deeper layers — unusual for tabular networks but effective here",
+          "zone-pair hash embedding: 16,384 buckets handle all 70k+ possible pairs naturally via collision without enumeration",
+        ],
+      },
+      {
+        title: "feature engineering",
+        items: [
+          "13 zone-pair statistics with bayesian shrinkage — smooths sparse pairs toward pickup-zone mean with a fallback hierarchy: pair → pickup zone → dropoff zone → global mean",
+          "6 traffic-regime time buckets (late night, early morning, am rush, midday, pm rush, evening) with per-regime pair statistics",
+          "11 temporal features: cyclical hour/dow encoding, rush hour flags, night flags, normalized minute-of-day",
+          "zone-pair median alone (296.7s) beats xgboost (351s) with zero ml — the signal is in the feature engineering",
+        ],
+      },
+      {
+        title: "results",
+        items: [
+          "264.5s mae on dev set — 25% better than xgboost baseline (351s), 11% better than zone-pair median (296.7s)",
+          "3 architecture versions: v1 (272.1s, l1 loss) → v2 (266.2s, huber loss + temporal features) → v3 (264.5s, residual blocks + embedding interactions)",
+          "model converges in 5 epochs on 37m rows. training loss keeps dropping after epoch 5 but dev mae rises — classic overfitting window caught by early stopping",
+          "inference under 1ms per request (200x faster than the 200ms constraint), ~15mb model checkpoint",
+        ],
+      },
+    ],
+    links: {
+      github: "https://github.com/sarthakbiswas97/eta-engine",
+    },
+    technologies: [
+      "python",
+      "pytorch",
+      "pandas",
+      "mlflow",
+      "docker",
+      "hugging face hub",
+    ],
+    features: [
+      {
+        title: "learned zone embeddings",
+        description:
+          "50-dim embeddings for 266 zones learn spatial relationships purely from trip patterns. no external geography needed — model is transferable to any city with zone ids.",
+      },
+      {
+        title: "bayesian shrinkage for sparse pairs",
+        description:
+          "handles rare and unseen zone pairs gracefully. shrinkage prior smooths toward pickup-zone mean; fallback hierarchy prevents cold-start failures.",
+      },
+      {
+        title: "huber loss for robustness",
+        description:
+          "l2 penalty for errors under 300s, l1 for errors above. addresses systematic long-trip underprediction without instability from pure l2.",
+      },
+      {
+        title: "onecyclelr with warmup",
+        description:
+          "10% warmup prevents nan gradients on random embeddings (failed without it). cosine decay from 5e-4 to 5e-7 for stable convergence.",
+      },
+      {
+        title: "memory-efficient training",
+        description:
+          "37m rows processed in 2m-row chunks. keeps memory under 6gb, enabling free-tier gpu training on colab/kaggle t4.",
+      },
+      {
+        title: "systematic iteration",
+        description:
+          "3 architecture versions with clear progression. every change measured against dev mae and logged to mlflow. feature ablations documented.",
+      },
+    ],
+    workflow: [
+      "download and clean 37m nyc taxi trips (2023), split temporally into train/dev",
+      "compute zone-pair statistics with bayesian shrinkage across 6 traffic regimes",
+      "extract 24 continuous features (zone-pair stats + temporal) and 2 categorical (zone ids)",
+      "train dual-branch embedding network with huber loss, onecyclelr, and early stopping",
+      "evaluate on held-out dev set, pick best checkpoint by mae (not training loss)",
+    ],
+  },
+  {
+    id: 2,
     name: "stock trader rl environment",
     date: "april, 2026",
     collabs: [],
@@ -129,7 +226,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     name: "autonomous trader agent",
     date: "march, 2026",
     collabs: [],
@@ -232,73 +329,6 @@ export const projects: Project[] = [
       "reversal scanner ranks stocks by decline magnitude across lookback windows",
       "risk guardian validates exposure limits, drawdown gates, and kill switches",
       "trade executor places orders via zerodha kite connect (cnc for swing holding)",
-    ],
-  },
-  {
-    id: 3,
-    name: "ryuk ai",
-    date: "march, 2026",
-    collabs: [],
-    type: "ai/backend",
-    description:
-      "conversational database analytics platform using llm tool-calling to translate natural language into validated sql.",
-    contentSections: [
-      {
-        title: "what it does",
-        items: [
-          "connects to any database (postgresql, mysql) and lets users query data using natural language instead of writing sql",
-          "translates questions into validated sql using llm tool-calling, executes them, and visualizes results — all in a conversational interface",
-          "step-by-step reasoning visualization shows exactly how the query was generated, so users can verify and trust the results",
-        ],
-      },
-      {
-        title: "how it works",
-        items: [
-          "llm tool-calling architecture: the model decides which tools to call (schema lookup, sql generation, validation) based on the user's question",
-          "automatic schema discovery — connects to the database, maps tables and columns, tracks schema drift over time",
-          "read-only mode and encrypted credential storage — databases are never modified through the platform",
-        ],
-      },
-      {
-        title: "analytics & reporting",
-        items: [
-          "live dashboards with pinned charts that stay in sync with the underlying data",
-          "searchable conversation history — go back to any previous query and its results",
-          "one-click pdf report export for sharing insights with stakeholders",
-        ],
-      },
-    ],
-    links: {
-      demo: "https://ryuk-ai.xyz",
-    },
-    technologies: [
-      "fastapi",
-      "litellm",
-      "inngest",
-      "postgresql",
-      "next.js",
-    ],
-    features: [
-      {
-        title: "llm tool-calling architecture",
-        description:
-          "translates natural language queries into validated sql using llm tool-calling. step-by-step reasoning visualization shows the query generation logic.",
-      },
-      {
-        title: "automatic schema discovery",
-        description:
-          "connects to databases, discovers tables and columns automatically, tracks schema drift over time.",
-      },
-      {
-        title: "safe database exploration",
-        description:
-          "read-only mode, encrypted credential storage. databases are never modified through the platform.",
-      },
-      {
-        title: "dashboards & reporting",
-        description:
-          "live dashboards with pinned charts, searchable conversation history, and one-click pdf report export.",
-      },
     ],
   },
 ];
