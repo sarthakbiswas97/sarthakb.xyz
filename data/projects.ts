@@ -135,7 +135,7 @@ export const projects: Project[] = [
     type: "rl/ml",
     featured: true,
     description:
-      "openenv-compliant reinforcement learning environment for evaluating llm trading agents on indian equity markets. finalist at the meta pytorch openenv hackathon (top tier out of 52,000+ registrants).",
+      "openenv-compliant reinforcement learning environment for evaluating llm trading agents on indian equity markets. qualified for the meta pytorch openenv hackathon finale (top 800 out of 32,000+ teams).",
     contentSections: [
       {
         title: "what it does",
@@ -187,9 +187,9 @@ export const projects: Project[] = [
     ],
     features: [
       {
-        title: "meta pytorch hackathon finalist",
+        title: "meta pytorch hackathon finale",
         description:
-          "selected for the grand finale (april 25-26, 2026 in bangalore) out of 52,000+ registered developers. presenting directly to meta engineers.",
+          "qualified for the finale (top 800 out of 32,000+ teams). built and presented the environment to meta engineers in bangalore, april 2026.",
       },
       {
         title: "three difficulty tiers",
