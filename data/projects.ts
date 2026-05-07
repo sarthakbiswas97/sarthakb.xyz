@@ -32,103 +32,6 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: 1,
-    name: "nyc eta engine",
-    date: "may, 2026",
-    collabs: [],
-    type: "ml/deep learning",
-    featured: true,
-    description:
-      "neural eta prediction engine for nyc taxi trips. 560k-param embedding network trained on 37m trips achieves 264.5s mae — 25% better than xgboost baseline, inference under 1ms.",
-    contentSections: [
-      {
-        title: "what it does",
-        items: [
-          "predicts taxi trip duration given pickup zone, dropoff zone, timestamp, and passenger count using 37 million real nyc yellow taxi trips from 2023",
-          "learns all spatial relationships from trip data via zone embeddings — no external geography, shapefiles, or hardcoded coordinates. if zone ids mapped to a different city, the model would work equally well",
-          "serves predictions in under 1ms on cpu, packaged in a ~500mb docker container for submission",
-        ],
-      },
-      {
-        title: "the model",
-        items: [
-          "dual-branch architecture: zone embeddings (pickup + dropoff + hash-based pair embedding) processed through an interaction mlp, and 24 continuous features (zone-pair statistics + temporal) through a separate branch",
-          "element-wise embedding product captures zone similarity (co-occurrence), element-wise difference captures trip directionality (a→b vs b→a)",
-          "residual blocks in the combined mlp for stable gradient flow through deeper layers — unusual for tabular networks but effective here",
-          "zone-pair hash embedding: 16,384 buckets handle all 70k+ possible pairs naturally via collision without enumeration",
-        ],
-      },
-      {
-        title: "feature engineering",
-        items: [
-          "13 zone-pair statistics with bayesian shrinkage — smooths sparse pairs toward pickup-zone mean with a fallback hierarchy: pair → pickup zone → dropoff zone → global mean",
-          "6 traffic-regime time buckets (late night, early morning, am rush, midday, pm rush, evening) with per-regime pair statistics",
-          "11 temporal features: cyclical hour/dow encoding, rush hour flags, night flags, normalized minute-of-day",
-          "zone-pair median alone (296.7s) beats xgboost (351s) with zero ml — the signal is in the feature engineering",
-        ],
-      },
-      {
-        title: "results",
-        items: [
-          "264.5s mae on dev set — 25% better than xgboost baseline (351s), 11% better than zone-pair median (296.7s)",
-          "3 architecture versions: v1 (272.1s, l1 loss) → v2 (266.2s, huber loss + temporal features) → v3 (264.5s, residual blocks + embedding interactions)",
-          "model converges in 5 epochs on 37m rows. training loss keeps dropping after epoch 5 but dev mae rises — classic overfitting window caught by early stopping",
-          "inference under 1ms per request (200x faster than the 200ms constraint), ~15mb model checkpoint",
-        ],
-      },
-    ],
-    links: {
-      github: "https://github.com/sarthakbiswas97/eta-engine",
-    },
-    technologies: [
-      "python",
-      "pytorch",
-      "pandas",
-      "mlflow",
-      "docker",
-      "hugging face hub",
-    ],
-    features: [
-      {
-        title: "learned zone embeddings",
-        description:
-          "50-dim embeddings for 266 zones learn spatial relationships purely from trip patterns. no external geography needed — model is transferable to any city with zone ids.",
-      },
-      {
-        title: "bayesian shrinkage for sparse pairs",
-        description:
-          "handles rare and unseen zone pairs gracefully. shrinkage prior smooths toward pickup-zone mean; fallback hierarchy prevents cold-start failures.",
-      },
-      {
-        title: "huber loss for robustness",
-        description:
-          "l2 penalty for errors under 300s, l1 for errors above. addresses systematic long-trip underprediction without instability from pure l2.",
-      },
-      {
-        title: "onecyclelr with warmup",
-        description:
-          "10% warmup prevents nan gradients on random embeddings (failed without it). cosine decay from 5e-4 to 5e-7 for stable convergence.",
-      },
-      {
-        title: "memory-efficient training",
-        description:
-          "37m rows processed in 2m-row chunks. keeps memory under 6gb, enabling free-tier gpu training on colab/kaggle t4.",
-      },
-      {
-        title: "systematic iteration",
-        description:
-          "3 architecture versions with clear progression. every change measured against dev mae and logged to mlflow. feature ablations documented.",
-      },
-    ],
-    workflow: [
-      "download and clean 37m nyc taxi trips (2023), split temporally into train/dev",
-      "compute zone-pair statistics with bayesian shrinkage across 6 traffic regimes",
-      "extract 24 continuous features (zone-pair stats + temporal) and 2 categorical (zone ids)",
-      "train dual-branch embedding network with huber loss, onecyclelr, and early stopping",
-      "evaluate on held-out dev set, pick best checkpoint by mae (not training loss)",
-    ],
-  },
-  {
-    id: 2,
     name: "stock trader rl environment",
     date: "april, 2026",
     collabs: [],
@@ -223,6 +126,105 @@ export const projects: Project[] = [
       "agent reads market summary with technical indicators and submits trade action",
       "environment executes trade with realistic costs/slippage, computes reward, advances to next day",
       "at episode end, grader scores the full trajectory on task-specific criteria",
+    ],
+  },
+  {
+    id: 2,
+    name: "nyc eta engine",
+    date: "may, 2026",
+    collabs: [],
+    type: "ml/deep learning",
+    featured: true,
+    description:
+      "3-model ensemble (neural net + lightgbm + ft-transformer) for nyc taxi eta prediction. trained on 37m trips, achieves 252.7s mae — 28% better than xgboost baseline, inference under 5ms.",
+    contentSections: [
+      {
+        title: "what it does",
+        items: [
+          "predicts taxi trip duration given pickup zone, dropoff zone, timestamp, and passenger count using 37 million real nyc yellow taxi trips from 2023",
+          "learns all spatial relationships from trip data via zone embeddings — no external geography, shapefiles, or hardcoded coordinates. if zone ids mapped to a different city, the model would work equally well",
+          "serves predictions in under 5ms on cpu with a 3-model ensemble, packaged in a ~500mb docker container",
+        ],
+      },
+      {
+        title: "the ensemble",
+        items: [
+          "model 1: dual-branch embedding network (560k params) — zone embeddings with hash-based pair embedding, 24 continuous features, residual blocks. best at smooth interpolation for common routes",
+          "model 2: lightgbm (81 trees) — gradient-boosted trees with zone ids as native categoricals. near-zero bias (-6s) on rare pairs where the neural net struggles (-106s bias)",
+          "model 3: ft-transformer (406k params) — implemented from scratch, each feature projected into a 128-dim token, 3-layer self-attention with [cls] aggregation. positive bias (+65s) offsets nn's negative bias",
+          "ensemble weights optimized via grid search on full dev set: 0.6 nn + 0.2 lgbm + 0.2 ft-transformer",
+        ],
+      },
+      {
+        title: "feature engineering",
+        items: [
+          "14 zone-pair statistics with bayesian shrinkage — smooths sparse pairs toward pickup-zone mean with a fallback hierarchy: pair → pickup zone → dropoff zone → global mean",
+          "6 traffic-regime time buckets (late night, early morning, am rush, midday, pm rush, evening) with per-regime pair statistics",
+          "10 temporal features: cyclical hour/dow/month encoding, rush hour flags, night flags, normalized minute-of-day",
+          "zone-pair median alone (296.7s) beats xgboost (351s) with zero ml — the signal is in the feature engineering",
+        ],
+      },
+      {
+        title: "results",
+        items: [
+          "252.7s mae — 28% better than xgboost baseline (351s). ensemble reduced mae from 261s (best single model) to 253s",
+          "nn: 261.2s (precision on common routes) | lgbm: 261.7s (low bias on rare pairs) | ft: 284.7s (different error pattern, bias offset)",
+          "diagnostic-driven tuning identified rare-pair bias as the true bottleneck — no amount of nn tuning could fix it, lightgbm solved it",
+          "inference under 5ms per request, total model weights 6.3mb (2.3 + 2.4 + 1.6)",
+        ],
+      },
+    ],
+    links: {
+      github: "https://github.com/sarthakbiswas97/eta-engine",
+      docs: "https://huggingface.co/sarthakbiswas/eta-engine",
+    },
+    technologies: [
+      "python",
+      "pytorch",
+      "lightgbm",
+      "pandas",
+      "mlflow",
+      "docker",
+      "hugging face hub",
+    ],
+    features: [
+      {
+        title: "3-model ensemble",
+        description:
+          "neural net + lightgbm + ft-transformer with complementary strengths. each model has a different inductive bias — embeddings vs tree splits vs self-attention. ensemble reduced mae from 261s to 253s.",
+      },
+      {
+        title: "ft-transformer from scratch",
+        description:
+          "feature tokenizer transformer (gorishniy et al., neurips 2021). each feature projected into a 128-dim token, [cls] token aggregates via 3-layer self-attention. captures cross-feature interactions the mlp misses.",
+      },
+      {
+        title: "learned zone embeddings",
+        description:
+          "50-dim embeddings for 266 zones learn spatial relationships purely from trip patterns. no external geography needed — model is transferable to any city with zone ids.",
+      },
+      {
+        title: "bayesian shrinkage for sparse pairs",
+        description:
+          "handles rare and unseen zone pairs gracefully. shrinkage prior smooths toward pickup-zone mean; fallback hierarchy prevents cold-start failures.",
+      },
+      {
+        title: "diagnostic-driven tuning",
+        description:
+          "deep diagnostics (parameter health, rare-pair analysis, regularization checks) revealed rare-pair bias as the true bottleneck. prevented wasted experiments on architecture changes.",
+      },
+      {
+        title: "memory-efficient training",
+        description:
+          "37m rows processed in 2m-row chunks. keeps memory under 6gb, enabling free-tier gpu training on colab/kaggle t4.",
+      },
+    ],
+    workflow: [
+      "download and clean 37m nyc taxi trips (2023), split temporally into train/dev",
+      "compute zone-pair statistics with bayesian shrinkage across 6 traffic regimes",
+      "train neural net (37m rows, huber loss), lightgbm (10m rows, mae), ft-transformer (10m rows, l1)",
+      "optimize ensemble weights via grid search on full 1.23m dev set",
+      "evaluate on held-out dev set, pick best checkpoint by mae (not training loss)",
     ],
   },
   {
