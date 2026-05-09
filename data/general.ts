@@ -9,7 +9,7 @@ export const user = {
     title: "",
     subtitle: "ai engineer",
     userExcerpt:
-      "i build ml systems end-to-end. rl environments that train agents, neural networks that learn from millions of trips, and production pipelines that actually ship.",
+      "i build what comes after pretraining — fine-tuning pipelines, rl environments, reward systems, and production ml that ships.",
   },
   footer: {
     subtitle: "ai engineer",
