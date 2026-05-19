@@ -17,7 +17,7 @@ export const experiences = [
     roles: [
       {
         title: "ai engineer",
-        period: "nov 2025 - present",
+        period: "nov 2025 - apr 2026",
         type: "full time, remote",
         description:
           "built the ai video generation pipeline from scratch — from llm orchestration and model finetuning to production apis serving thousands of users.",
