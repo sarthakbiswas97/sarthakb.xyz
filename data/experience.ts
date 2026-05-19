@@ -25,12 +25,12 @@ export const experiences = [
           {
             title: "video generation pipeline",
             description:
-              "built an end-to-end pipeline that converts text/image queries into animated educational videos with multilingual narration in ~30 seconds. powered 280k+ videos across 14+ languages using manim for animation rendering and elevenlabs for text-to-speech.",
+              "built an end-to-end pipeline that converts text/image queries into animated educational videos with multilingual narration in ~30 seconds. powers videos across 14+ languages using manim for animation rendering and elevenlabs for text-to-speech.",
           },
           {
             title: "llm orchestration",
             description:
-              "designed a multi-stage llm pipeline with model routing, tool calling, and async task execution. serves 45k+ active users with reliable throughput.",
+              "designed a multi-stage llm pipeline with model routing, tool calling, and async task execution.",
           },
           {
             title: "dataset engineering & finetuning",
