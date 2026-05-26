@@ -8,12 +8,12 @@ export const skills: Skill[] = [
   {
     id: "ai-ml",
     title: "ai / machine learning",
-    items: ["PyTorch", "Hugging Face", "Scikit-learn", "Unsloth AI", "LLMs", "NLP", "Reinforcement Learning"],
+    items: ["PyTorch", "Hugging Face Transformers", "Scikit-learn", "Unsloth AI", "vLLM", "LLMs", "NLP", "Reinforcement Learning"],
   },
   {
     id: "training-techniques",
     title: "training / techniques",
-    items: ["SFT", "DPO", "RAG", "Prompt Engineering", "LLM Fine-tuning", "Data Pipelines"],
+    items: ["SFT", "GRPO", "DPO", "LoRA", "PEFT", "TRL", "RAG", "Prompt Engineering", "LLM Fine-tuning", "Data Pipelines"],
   },
   {
     id: "data-libraries",
@@ -28,7 +28,7 @@ export const skills: Skill[] = [
   {
     id: "cloud-devops",
     title: "cloud / devops / mlops",
-    items: ["AWS/GCP", "DigitalOcean", "Docker", "vLLM", "CI/CD", "GitHub Actions"],
+    items: ["AWS/GCP", "DigitalOcean", "Docker", "CI/CD", "GitHub Actions"],
   },
   {
     id: "languages-tools",

@@ -43,6 +43,7 @@ type NavItemEntry = {
   label: string;
   link: string;
   icon?: ComponentType<{ size?: number; className?: string }>;
+  textIcon?: string;
 };
 
 export default function Navbar() {
@@ -55,10 +56,10 @@ export default function Navbar() {
       : []),
     { label: "writes", link: "/writes" },
     { label: "resume", link: "/resume/resume.pdf" },
-    { label: "cal.com", link: user.socials.calcom },
     { label: "linkedin", link: user.socials.linkedin, icon: Linkedin },
     { label: "twitter", link: user.socials.twitter, icon: Twitter },
     { label: "github", link: user.socials.github, icon: Github },
+    { label: "hugging face", link: user.socials.huggingface, textIcon: "HF" },
   ];
 
 
@@ -67,50 +68,40 @@ export default function Navbar() {
       <div className="flex flex-row items-center gap-3 md:gap-10 flex-wrap">
         <div className="flex items-center gap-3 md:gap-5 lg:gap-10">
           {navItems
-            .filter((item) => !item.icon)
+            .filter((item) => !item.icon && !item.textIcon)
             .map((item) => (
               <NavItem key={item.label} {...item} />
             ))}
         </div>
         <div className="flex flex-wrap items-center gap-2">
           {navItems
-            .filter((item) => item.icon)
+            .filter((item) => item.icon || item.textIcon)
             .map((item) => {
-              const Icon = item.icon!;
               const isExternal = !item.link.startsWith("/");
-              if (isExternal) {
-                return (
-                  <a
-                    key={item.label}
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={item.label}
-                    title={item.label}
-                    className="group inline-flex items-center justify-center p-1 rounded hover:opacity-80 transition-opacity"
-                  >
-                    <Icon
-                      size={18}
-                      className="transition-colors duration-200 group-hover:[&_path]:fill-current"
-                      aria-hidden="true"
-                    />
-                  </a>
-                );
-              }
+              const Tag = isExternal ? "a" : Link;
+              const linkProps = isExternal
+                ? { href: item.link, target: "_blank", rel: "noopener noreferrer" }
+                : { href: item.link };
               return (
-                <Link
+                <Tag
                   key={item.label}
-                  href={item.link}
+                  {...linkProps}
                   aria-label={item.label}
                   title={item.label}
                   className="group inline-flex items-center justify-center p-1 rounded hover:opacity-80 transition-opacity"
                 >
-                  <Icon
-                    size={18}
-                    className="transition-colors duration-200 group-hover:[&_path]:fill-current"
-                    aria-hidden="true"
-                  />
-                </Link>
+                  {item.icon ? (
+                    <item.icon
+                      size={18}
+                      className="transition-colors duration-200 group-hover:[&_path]:fill-current"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <span className="text-sm font-bold" aria-hidden="true">
+                      {item.textIcon}
+                    </span>
+                  )}
+                </Tag>
               );
             })}
         </div>

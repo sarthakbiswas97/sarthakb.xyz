@@ -10,7 +10,7 @@ export default function HomeProjects() {
   const router = useRouter();
 
   return (
-    <section className="container p-4 flex flex-col gap-10 my-10">
+    <section id="projects" className="container p-4 flex flex-col gap-10 my-10">
       <div>
         <Link href={"/projects"}>
           <h2 className="text-6xl flex gap-2 items-end group">

@@ -15,8 +15,8 @@ export function generateSarthakPersonaPrompt(): string {
     Footer Subtitle: ${user.footer.subtitle}
     Socials: LinkedIn: ${user.socials.linkedin}, Twitter: ${
     user.socials.twitter
-  }, GitHub: ${user.socials.github}, Email: ${user.socials.mail}, Cal.com: ${
-    user.socials.calcom
+  }, GitHub: ${user.socials.github}, Email: ${user.socials.mail}, Hugging Face: ${
+    user.socials.huggingface
   }
     Spotify Playlist: ${user.playlist}
     Hobbies: ${user.hobbies.join(", ")}

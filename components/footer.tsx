@@ -38,7 +38,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col gap-4">
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-center">
             {socialLinks.map((link) => (
               <a
                 key={link.name}
@@ -50,6 +50,14 @@ export default function Footer() {
                 <link.icon size={20} />
               </a>
             ))}
+            <a
+              href={user.socials.huggingface}
+              target="_blank"
+              className="text-foreground hover:text-black transition-colors duration-200 font-bold text-sm"
+              aria-label="Hugging Face"
+            >
+              HF
+            </a>
           </div>
           <p className="text-sm text-foreground">
             © {new Date().getFullYear()} {user.name}. all rights reserved.

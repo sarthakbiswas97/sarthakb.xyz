@@ -10,37 +10,30 @@ export default function Hero() {
         <div className="flex flex-col gap-2">
           <div className="relative w-fit">
             <h2 className="text-6xl md:text-8xl font-instrument-serif">{user.name}</h2>
-            <a
-              href={user.openForWork ? user.socials.calcom : "#"}
-              target={user.openForWork ? "_blank" : undefined}
+            <span
+              className={cn(
+                "hidden md:flex items-center gap-1.5 absolute -right-16 top-[50%] -translate-y-[50%] rotate-90 text-xs whitespace-nowrap",
+                !user.openForWork && "line-through"
+              )}
             >
-              <span
-                className={cn(
-                  "hidden md:flex items-center gap-1.5 absolute -right-16 top-[50%] -translate-y-[50%] rotate-90 hover:underline text-xs whitespace-nowrap",
-                  !user.openForWork && "line-through"
-                )}
-              >
-                {user.openForWork && (
-                  <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                )}
-                open for work
-              </span>
-            </a>
+              {user.openForWork && (
+                <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              )}
+              open for work
+            </span>
             <div className="md:hidden flex items-baseline justify-between w-full mt-2">
               <p className="text-xl font-normal">
                 {user.hero.subtitle}
               </p>
-              <a
-                href={user.openForWork ? user.socials.calcom : "#"}
-                target={user.openForWork ? "_blank" : undefined}
+              <span
                 className={cn(
-                  "text-xs hover:underline",
+                  "text-xs",
                   user.openForWork && "bg-emerald-300 dark:bg-emerald-500/50 px-1.5",
                   !user.openForWork && "line-through"
                 )}
               >
                 (open for work)
-              </a>
+              </span>
             </div>
           </div>
           <p className="hidden md:block text-xl md:text-4xl font-bodoni font-extralight tracking-tighter">
@@ -65,17 +58,6 @@ export default function Hero() {
               className="group-hover:rotate-45 transition-transform duration-300"
             />
           </Link>
-          <a
-            href={user.socials.calcom}
-            target="_blank"
-            className="group flex items-center gap-2 text-lg hover:underline"
-          >
-            <span>book a call</span>
-            <ArrowUp
-              size={20}
-              className="group-hover:rotate-45 transition-transform duration-300"
-            />
-          </a>
         </div>
       </div>
     </section>

@@ -24,7 +24,7 @@ ${user.hero.userExcerpt}
 - GitHub: ${user.socials.github}
 - Twitter: ${user.socials.twitter}
 - Email: ${user.socials.mail}
-- Calendar: ${user.socials.calcom}
+- Hugging Face: ${user.socials.huggingface}
 
 ## Blog Posts
 
