@@ -155,6 +155,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/sarthakbiswas97/stock-trader-env",
+      demo: "https://huggingface.co/spaces/sarthakbiswas/stock-trader-env",
     },
     technologies: [
       "python",
@@ -218,7 +219,7 @@ export const projects: Project[] = [
       {
         title: "what it does",
         items: [
-          "predicts taxi trip duration given pickup zone, dropoff zone, timestamp, and passenger count using 37 million real nyc yellow taxi trips from 2023",
+          "predicts taxi trip duration given pickup zone, dropoff zone, timestamp, and passenger count using 37 million real yellow taxi trips from 2023",
           "learns all spatial relationships from trip data via zone embeddings — no external geography, shapefiles, or hardcoded coordinates. if zone ids mapped to a different city, the model would work equally well",
           "serves predictions in under 4ms on cpu with a 3-model ensemble, packaged in a ~500mb docker container",
         ],

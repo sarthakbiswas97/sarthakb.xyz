@@ -7,13 +7,13 @@ export interface Skill {
 export const skills: Skill[] = [
   {
     id: "ai-ml",
-    title: "ai / machine learning",
-    items: ["PyTorch", "Hugging Face Transformers", "Scikit-learn", "Unsloth AI", "vLLM", "LLMs", "NLP", "Reinforcement Learning"],
+    title: "ai / ml",
+    items: ["PyTorch", "HF Transformers", "Scikit-learn", "Unsloth AI", "vLLM"],
   },
   {
-    id: "training-techniques",
-    title: "training / techniques",
-    items: ["SFT", "GRPO", "DPO", "LoRA", "PEFT", "TRL", "RAG", "Prompt Engineering", "LLM Fine-tuning", "Data Pipelines"],
+    id: "techniques",
+    title: "techniques",
+    items: ["LLM Fine-tuning", "Reinforcement Learning", "Deep Learning", "RAG", "Feature Engineering", "Data Pipelines"],
   },
   {
     id: "data-libraries",

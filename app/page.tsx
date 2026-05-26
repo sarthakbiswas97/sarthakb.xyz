@@ -6,6 +6,7 @@ import Skills from "@/components/home/skills";
 import Experience from "@/components/home/experience";
 import Blog from "@/components/home/blog";
 import { GithubCalendar } from "@/components/home/github";
+import CurrentlyWorkingOn from "@/components/home/current";
 import { getAllPostsMeta } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -35,6 +36,7 @@ export default async function Home() {
       <div className="relative z-10 bg-background">
         {posts.length > 0 && <Blog posts={posts} />}
         <Experience />
+        <CurrentlyWorkingOn />
         <HomeProjects />
         <Skills />
       </div>
